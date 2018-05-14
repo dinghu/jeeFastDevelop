@@ -158,6 +158,7 @@ INSERT INTO `t_sec_user` (`id`,`login_name`,`password`,`user_name`,`user_type`,`
  (54,'zhanghejie','e10adc3949ba59abbe56e057f20f883e','张合杰','user','','13366442927',NULL,'2018-04-27 16:16:38','valid','2013-03-07 00:00:00',NULL),
  (58,'tutor','e10adc3949ba59abbe56e057f20f883e','教师','admin','jlsdzhj@126.com','13366442928',NULL,'2018-05-03 17:40:45','valid','2018-05-03 00:00:00',NULL),
  (74,'xjjv92s2018-05-07 14:42:55','e10adc3949ba59abbe56e057f20f883e','张三1','user','zhangsan@126.com','13966442927',NULL,'2018-05-07 14:42:55','valid',NULL,NULL),
+ (75,'xjj7w7R2018-05-07 14:42:55','e10adc3949ba59abbe56e057f20f883e','张三2','user','zhangsan@127.com',NULL,NULL,'2018-05-07 14:42:55','valid',NULL,NULL),
  (76,'test3','e10adc3949ba59abbe56e057f20f883e','张三3','user','zhangsan@128.com',NULL,NULL,'2018-05-07 14:42:55','valid',NULL,NULL),
  (77,'test4','e10adc3949ba59abbe56e057f20f883e','张三4','user','zhangsan@129.com',NULL,NULL,'2018-05-07 14:42:55','valid',NULL,NULL),
  (78,'test5','e10adc3949ba59abbe56e057f20f883e','张三5','user','zhangsan@130.com',NULL,NULL,'2018-05-07 14:42:55','valid',NULL,NULL),
@@ -251,21 +252,6 @@ CREATE TABLE `t_sys_xfile` (
 
 /*!40000 ALTER TABLE `t_sys_xfile` DISABLE KEYS */;
 INSERT INTO `t_sys_xfile` (`id`,`file_realname`,`file_path`,`file_title`,`url`,`file_size`,`user_id`,`extension_name`,`create_date`,`is_deleted`) VALUES 
- (15,'20180507111800239.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507111800239.xls','user (2).xls','/files/upload/user/2018/05/07/20180507111800239.xls',20992,52,'.xls','2018-05-07 11:18:03',NULL),
- (16,'20180507112404352.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507112404352.xls','user (2).xls','/files/upload/user/2018/05/07/20180507112404352.xls',20992,52,'.xls','2018-05-07 11:24:44',NULL),
- (17,'20180507112503823.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507112503823.xls','user (2).xls','/files/upload/user/2018/05/07/20180507112503823.xls',20992,52,'.xls','2018-05-07 11:25:39',NULL),
- (18,'20180507112601670.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507112601670.xls','user (2).xls','/files/upload/user/2018/05/07/20180507112601670.xls',20992,52,'.xls','2018-05-07 11:26:16',NULL),
- (19,'2018050711300330.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/2018050711300330.xls','user (2).xls','/files/upload/user/2018/05/07/2018050711300330.xls',20992,52,'.xls','2018-05-07 11:30:34',NULL),
- (20,'2018050711330352.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/2018050711330352.xls','user (2).xls','/files/upload/user/2018/05/07/2018050711330352.xls',20992,52,'.xls','2018-05-07 11:33:35',NULL),
- (21,'20180507140105656.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507140105656.xls','user (2).xls','/files/upload/user/2018/05/07/20180507140105656.xls',20992,52,'.xls','2018-05-07 14:01:57',NULL),
- (22,'20180507140304510.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507140304510.xls','user (2).xls','/files/upload/user/2018/05/07/20180507140304510.xls',20992,52,'.xls','2018-05-07 14:03:45',NULL),
- (23,'20180507140701863.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507140701863.xls','user.xls','/files/upload/user/2018/05/07/20180507140701863.xls',20992,52,'.xls','2018-05-07 14:07:18',NULL),
- (24,'2018050714240150.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/2018050714240150.xls','user.xls','/files/upload/user/2018/05/07/2018050714240150.xls',20992,52,'.xls','2018-05-07 14:24:16',NULL),
- (25,'20180507142602642.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507142602642.xls','user.xls','/files/upload/user/2018/05/07/20180507142602642.xls',20992,52,'.xls','2018-05-07 14:26:26',NULL),
- (26,'20180507143204852.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507143204852.xls','user.xls','/files/upload/user/2018/05/07/20180507143204852.xls',20992,52,'.xls','2018-05-07 14:32:49',NULL),
- (27,'20180507143804288.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507143804288.xls','user.xls','/files/upload/user/2018/05/07/20180507143804288.xls',20992,52,'.xls','2018-05-07 14:38:42',NULL),
- (28,'20180507144101862.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507144101862.xls','user.xls','/files/upload/user/2018/05/07/20180507144101862.xls',20992,52,'.xls','2018-05-07 14:41:18',NULL),
- (29,'20180507144404462.xls','D:/git/coding/xjj/WebRoot/files/upload/user/2018/05/07/20180507144404462.xls','user.xls','/files/upload/user/2018/05/07/20180507144404462.xls',20992,52,'.xls','2018-05-07 14:44:44',NULL);
 /*!40000 ALTER TABLE `t_sys_xfile` ENABLE KEYS */;
 
 
