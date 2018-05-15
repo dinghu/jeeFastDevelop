@@ -5,27 +5,16 @@
     生成的代码统一规范、统一风格、统一结构便于管理维护。前端页面使用当前最流行的ACE和bootstrap技术，自适应pc、移动端。
 
 #### 软件架构
-软件架构说明
-
+springMvc+sping4.1+Mybaties3.4搭建的SSM快速开发框架。前端使用ace、bootstrap响应式框架。
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 安装jdk1.6+、tomcat6+、mysql5.5+
+2. 下载代码并初始化数据库doc/sql/xjj_db_init.sql
+3. 发布运行项目
 
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+#### 交流群
+1. QQ群：174266358
 
 
 #### 码云特技
