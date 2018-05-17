@@ -6,7 +6,6 @@
 	<sql id="queryParam">
         <foreach collection="query.keys" item="key" open="where"  separator="and">  
 		<if test="'orderBy' != key">  
-			<!--  ${key} ${query[key]["oper"]} #{query.${key}[${"val"}]} -->
 			<foreach collection="query[key].keys" item="oper" separator="and">  
 				${key} ${oper} #{query.${key}[${oper}]}
 	        </foreach> 

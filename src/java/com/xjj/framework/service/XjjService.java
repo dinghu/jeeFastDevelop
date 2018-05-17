@@ -1,8 +1,6 @@
 package com.xjj.framework.service;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.xjj.framework.entity.EntitySupport;
 import com.xjj.framework.exception.DataAccessException;
 import com.xjj.framework.web.support.Pagination;
@@ -23,12 +21,34 @@ public interface XjjService<E extends EntitySupport> {
 	 */
 	public void update(E obj);
 	
+	/**
+	 * 删除
+	 * @param id
+	 */
 	public void delete(Long id);
+	/**
+	 * 删除
+	 * @param id
+	 */
 	public void delete(E obj);
 
+	/**
+	 * 查询条数
+	 * @param param
+	 */
 	public int getCount(XJJParameter param);
 	
+	/**
+	 * 根据ID得到实体类
+	 * @param ID
+	 * @return
+	 */
 	public E getById(Long ID);
+	/**
+	 * 根据参数得到实体类
+	 * @param param
+	 * @return
+	 */
 	public E getByParam(XJJParameter param) throws DataAccessException;
 	
 	/**
@@ -59,5 +79,13 @@ public interface XjjService<E extends EntitySupport> {
 	 */
 	public Pagination findPage(XJJParameter param, Pagination page);
 	
+	/**
+	 * 判断是否唯一
+	 * @param tableName
+	 * @param columnName
+	 * @param columnVal
+	 * @param id
+	 * @return
+	 */
 	public boolean checkUniqueVal( String tableName,String columnName,String columnVal,Long id);
 }
