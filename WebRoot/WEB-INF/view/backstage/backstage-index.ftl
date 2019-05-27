@@ -183,8 +183,8 @@
         <div class="footer-inner">
             <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">XJJ</span>
-							Application &copy; 2018-2028
+							<span class="blue bolder">author</span>
+							hale &copy; 2018-2028
 						</span>
                 <#--
                 &nbsp; &nbsp;

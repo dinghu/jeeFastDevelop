@@ -107,7 +107,7 @@ public class PrivilegeService {
          */
         System.out.println("=====================缓存权限开始==========================");
         Set<Class<?>> classSet = new HashSet<Class<?>>();
-        classSet.addAll(getClasses("com.xjj"));
+        classSet.addAll(getClasses("com.fast.develop"));
         //通过配置文件来读取需要扫描的包名
 
 

@@ -48,7 +48,7 @@
                 <div class="col-sm-5 col-sm-offset-3 form-box">
                     <div class="form-top">
                         <div class="form-top-left">
-                            <h3>XJJ</h3>
+                            <h3>欢迎登录系统</h3>
                         </div>
                         <div class="form-top-right">
                             <i class="fa fa-lock"></i>

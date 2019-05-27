@@ -1,6 +1,6 @@
 <#include "/templates/xjj-index.ftl">
 <#--导航-->
-<@nav '新境界','首页公告'/>
+<@nav '首页','首页公告'/>
 <@content id="notice">
 
     <div class="panel panel-info">
