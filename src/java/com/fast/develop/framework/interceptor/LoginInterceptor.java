@@ -12,34 +12,34 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fast.develop.common.XJJConstants;
 import com.fast.develop.framework.web.ManagerInfo;
 
-public class LoginInterceptor implements HandlerInterceptor  {
+public class LoginInterceptor implements HandlerInterceptor {
 
-	protected final Logger logger = Logger.getLogger(getClass());
-	
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-		ManagerInfo loginInfo = (ManagerInfo)request.getSession().getAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY);
-		if(loginInfo == null && handler instanceof HandlerMethod){
-			String login_url = ConfigUtils.get(XJJConstants.CONFIG_MANAGER_LOGIN_URL, request.getContextPath()+"/") ;
-			response.sendRedirect(login_url);
-			if(logger.isDebugEnabled()){
-				logger.debug("用户没有登录，重定向到网站根目录！");
-			}
-			return false;
-		}
-		return true;
-	}
+    protected final Logger logger = Logger.getLogger(getClass());
 
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response, Object handler) throws Exception {
+        ManagerInfo loginInfo = (ManagerInfo) request.getSession().getAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY);
+        if (loginInfo == null && handler instanceof HandlerMethod) {
+            String login_url = ConfigUtils.get(XJJConstants.CONFIG_MANAGER_LOGIN_URL, request.getContextPath() + "/");
+            response.sendRedirect(login_url);
+            if (logger.isDebugEnabled()) {
+                logger.debug("用户没有登录，重定向到网站根目录！");
+            }
+            return false;
+        }
+        return true;
+    }
 
-	}
+    public void postHandle(HttpServletRequest request,
+                           HttpServletResponse response, Object handler,
+                           ModelAndView modelAndView) throws Exception {
 
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		
-	}   
+    }
+
+    public void afterCompletion(HttpServletRequest request,
+                                HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+
+    }
 
 }

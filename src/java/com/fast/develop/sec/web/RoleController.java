@@ -2,13 +2,14 @@
  * Description: Controller for 角色
  * Copyright:   Copyright (c) 2018
  * Company:     xjj
- * @author      zhanghejie
- * @version     1.0
+ * @author zhanghejie
+ * @version 1.0
  * @see
-	HISTORY
-	*  2018-04-18 zhanghejie Create File
-**************************************************/
+HISTORY
+ *  2018-04-18 zhanghejie Create File
+ **************************************************/
 package com.fast.develop.sec.web;
+
 import com.fast.develop.framework.json.XjjJson;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.Pagination;
@@ -34,73 +35,73 @@ import com.fast.develop.sec.service.RoleService;
 @Controller
 @RequestMapping("/sec/role")
 public class RoleController extends SpringControllerSupport {
-	@Autowired
-	private RoleService roleService;
-	
-	@SecPrivilege(title="角色管理")
-	@RequestMapping(value = "/index")
-	public String index(Model model) {
-		String page = this.getViewPath("index");
-		return page;
-	}
-	@SecList
-	@RequestMapping(value = "/list")
-	public String list(Model model,
-			@QueryParameter XJJParameter query,
-			@ModelAttribute("page") Pagination page
-			) {
-		page = roleService.findPage(query,page);
-		return getViewPath("list");
-	}
-	
-	@SecCreate
-	@RequestMapping("/input")
-	public String create(@ModelAttribute("role") RoleEntity role,Model model){
-		return getViewPath("input");
-	}
-	
-	@SecEdit
-	@RequestMapping("/input/{id}")
-	public String edit(@PathVariable("id") Long id, Model model){
-		RoleEntity role = roleService.getById(id);
-		model.addAttribute("role",role);
-		return getViewPath("input");
-	}
-	
-	@RequestMapping("/save")
-	public @ResponseBody
-    XjjJson save(@ModelAttribute RoleEntity role){
-		
-		validateSave(role);
-		if(role.isNew())
-		{
-			//role.setCreateDate(new Date());
-			roleService.save(role);
-		}else
-		{
-			roleService.update(role);
-		}
-		return XjjJson.success("保存成功");
-	}
-	
-	
-	/**
-	 * 数据校验
-	 **/
-	private void validateSave(RoleEntity role){
-		//必填项校验
-	}
-	
-	@SecDelete
-	@RequestMapping("/delete")
-	public @ResponseBody XjjJson delete(@RequestParam("ids") Long[] ids){
-		if(ids == null || ids.length == 0){
-			return XjjJson.error("没有选择删除记录");
-		}
-		for(Long id : ids){
-			roleService.delete(id);
-		}
-		return XjjJson.success("成功删除"+ids.length+"条");
-	}
+    @Autowired
+    private RoleService roleService;
+
+    @SecPrivilege(title = "角色管理")
+    @RequestMapping(value = "/index")
+    public String index(Model model) {
+        String page = this.getViewPath("index");
+        return page;
+    }
+
+    @SecList
+    @RequestMapping(value = "/list")
+    public String list(Model model,
+                       @QueryParameter XJJParameter query,
+                       @ModelAttribute("page") Pagination page
+    ) {
+        page = roleService.findPage(query, page);
+        return getViewPath("list");
+    }
+
+    @SecCreate
+    @RequestMapping("/input")
+    public String create(@ModelAttribute("role") RoleEntity role, Model model) {
+        return getViewPath("input");
+    }
+
+    @SecEdit
+    @RequestMapping("/input/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        RoleEntity role = roleService.getById(id);
+        model.addAttribute("role", role);
+        return getViewPath("input");
+    }
+
+    @RequestMapping("/save")
+    public @ResponseBody
+    XjjJson save(@ModelAttribute RoleEntity role) {
+
+        validateSave(role);
+        if (role.isNew()) {
+            //role.setCreateDate(new Date());
+            roleService.save(role);
+        } else {
+            roleService.update(role);
+        }
+        return XjjJson.success("保存成功");
+    }
+
+
+    /**
+     * 数据校验
+     **/
+    private void validateSave(RoleEntity role) {
+        //必填项校验
+    }
+
+    @SecDelete
+    @RequestMapping("/delete")
+    public @ResponseBody
+    XjjJson delete(@RequestParam("ids") Long[] ids) {
+        if (ids == null || ids.length == 0) {
+            return XjjJson.error("没有选择删除记录");
+        }
+        for (Long id : ids) {
+            roleService.delete(id);
+        }
+        return XjjJson.success("成功删除" + ids.length + "条");
+    }
 }
 

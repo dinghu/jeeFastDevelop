@@ -12,16 +12,16 @@ import com.fast.develop.framework.service.XjjServiceSupport;
 @Service
 public class DictServiceImpl extends XjjServiceSupport<DictItem> implements DictService {
 
-	// 注入Service依赖
-	@Autowired
-	private DictDao dictDao;
+    // 注入Service依赖
+    @Autowired
+    private DictDao dictDao;
 
 
-	@Override
-	public XjjDAO<DictItem> getDao() {
-		
-		return dictDao;
-	}
+    @Override
+    public XjjDAO<DictItem> getDao() {
+
+        return dictDao;
+    }
 
 
 }

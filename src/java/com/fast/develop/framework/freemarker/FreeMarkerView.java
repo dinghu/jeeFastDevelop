@@ -49,68 +49,69 @@ import freemarker.template.Configuration;
  *
  * @author Darren Davison
  * @author Juergen Hoeller
- * @since 03.03.2004
  * @see #setUrl
  * @see #setExposeSpringMacroHelpers
  * @see #setEncoding
  * @see #setConfiguration
  * @see FreeMarkerConfig
  * @see FreeMarkerConfigurer
+ * @since 03.03.2004
  */
 public class FreeMarkerView extends org.springframework.web.servlet.view.freemarker.FreeMarkerView {
 
-	
-	private static final String CONTEXT_PATH = "base";
-	private static final String SERVLET_PATH = "servletPath";
-	private static final String SERVLET_URL = "servletUrl";
-	private static final String REFERER_PATH = "refererPath";
-	
-	
-	@Override
+
+    private static final String CONTEXT_PATH = "base";
+    private static final String SERVLET_PATH = "servletPath";
+    private static final String SERVLET_URL = "servletUrl";
+    private static final String REFERER_PATH = "refererPath";
+
+
+    @Override
     protected void exposeHelpers(Map<String, Object> model, HttpServletRequest request) throws Exception {
-		//设置工程路径，给freemarker使用
-    	model.put(CONTEXT_PATH, request.getContextPath());
-		
-		//设置基本的url路径，不包括参数
-		StringBuilder url = new StringBuilder();
-		url.append(request.getServletPath()); //请求页面或其他地址
-		model.put(SERVLET_PATH, url.toString());
-		
-		//设置完整的url路径，包括参数
-		String param = request.getQueryString();
-		if(param != null && !param.equals("")){
-			url.append("?").append(param);
-		}
-		model.put(SERVLET_URL, url.toString());
-		
-		//设置上一次访问的页面路径
-		String preUrl = request.getHeader("Referer");
-		if(preUrl != null){
-			model.put(REFERER_PATH, preUrl);
-		}
+        //设置工程路径，给freemarker使用
+        model.put(CONTEXT_PATH, request.getContextPath());
+
+        //设置基本的url路径，不包括参数
+        StringBuilder url = new StringBuilder();
+        url.append(request.getServletPath()); //请求页面或其他地址
+        model.put(SERVLET_PATH, url.toString());
+
+        //设置完整的url路径，包括参数
+        String param = request.getQueryString();
+        if (param != null && !param.equals("")) {
+            url.append("?").append(param);
+        }
+        model.put(SERVLET_URL, url.toString());
+
+        //设置上一次访问的页面路径
+        String preUrl = request.getHeader("Referer");
+        if (preUrl != null) {
+            model.put(REFERER_PATH, preUrl);
+        }
         super.exposeHelpers(model, request);
     }
-    
-    
-	/**
-	 * Autodetect a {@link FreeMarkerConfig} object via the ApplicationContext.
-	 * @return the Configuration instance to use for FreeMarkerViews
-	 * @throws BeansException if no Configuration instance could be found
-	 * @see #getApplicationContext
-	 * @see #setConfiguration
-	 */
-	protected FreeMarkerConfig autodetectConfiguration() throws BeansException {
 
-		FreeMarkerConfig config = super.autodetectConfiguration();
-		ClassTemplateLoader ctl = new ClassTemplateLoader(this.getClass(), "/WebRoot/WEB-INF/view/");
-		ClassTemplateLoader ctl1 = new ClassTemplateLoader(this.getClass(), "/WebContent/WEB-INF/view/");
-		TemplateLoader tl = config.getConfiguration().getTemplateLoader();
-		TemplateLoader[] loaders = new TemplateLoader[] { tl, ctl, ctl1 };
-		MultiTemplateLoader mtl = new MultiTemplateLoader(loaders);
-		config.getConfiguration().setTemplateLoader(mtl);
 
-		return config;
-	}
+    /**
+     * Autodetect a {@link FreeMarkerConfig} object via the ApplicationContext.
+     *
+     * @return the Configuration instance to use for FreeMarkerViews
+     * @throws BeansException if no Configuration instance could be found
+     * @see #getApplicationContext
+     * @see #setConfiguration
+     */
+    protected FreeMarkerConfig autodetectConfiguration() throws BeansException {
+
+        FreeMarkerConfig config = super.autodetectConfiguration();
+        ClassTemplateLoader ctl = new ClassTemplateLoader(this.getClass(), "/WebRoot/WEB-INF/view/");
+        ClassTemplateLoader ctl1 = new ClassTemplateLoader(this.getClass(), "/WebContent/WEB-INF/view/");
+        TemplateLoader tl = config.getConfiguration().getTemplateLoader();
+        TemplateLoader[] loaders = new TemplateLoader[]{tl, ctl, ctl1};
+        MultiTemplateLoader mtl = new MultiTemplateLoader(loaders);
+        config.getConfiguration().setTemplateLoader(mtl);
+
+        return config;
+    }
 
 
 }

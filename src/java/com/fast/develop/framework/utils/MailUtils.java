@@ -14,7 +14,7 @@ package com.fast.develop.framework.utils;
 
 
 public class MailUtils {
-	
+
 //	protected final static Log logger = LogFactory.getLog(MailUtils.class);
 //
 //	protected static final String DEFAULT_MAIL_PORT ="25";//默认端口号

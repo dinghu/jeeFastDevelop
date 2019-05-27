@@ -13,64 +13,65 @@ import com.fast.develop.framework.security.PrivilegeService;
 
 public class SecurityServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-	/**
-	 * Constructor of the object.
-	 */
-	public SecurityServlet() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
-	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
-	}
+    /**
+     * Constructor of the object.
+     */
+    public SecurityServlet() {
+        super();
+    }
 
-	/**
-	 * The doGet method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to get.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-			this.init();
-	}
+    /**
+     * Destruction of the servlet. <br>
+     */
+    public void destroy() {
+        super.destroy(); // Just puts "destroy" string in log
+        // Put your code here
+    }
 
-	/**
-	 * The doPost method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to post.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    /**
+     * The doGet method of the servlet. <br>
+     * <p>
+     * This method is called when a form has its tag value method equals to get.
+     *
+     * @param request  the request send by the client to the server
+     * @param response the response send by the server to the client
+     * @throws ServletException if an error occurred
+     * @throws IOException      if an error occurred
+     */
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        this.init();
+    }
 
-		this.doGet(request, response);
-	}
+    /**
+     * The doPost method of the servlet. <br>
+     * <p>
+     * This method is called when a form has its tag value method equals to post.
+     *
+     * @param request  the request send by the client to the server
+     * @param response the response send by the server to the client
+     * @throws ServletException if an error occurred
+     * @throws IOException      if an error occurred
+     */
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
-	public void init() throws ServletException {
-		//初始化权限
-		PrivilegeService.init();
-		SecurityCache.init();
-		
-		//初始化字典缓存
-		DictConstants.init();
-	}
+        this.doGet(request, response);
+    }
+
+    /**
+     * Initialization of the servlet. <br>
+     *
+     * @throws ServletException if an error occurs
+     */
+    public void init() throws ServletException {
+        //初始化权限
+        PrivilegeService.init();
+        SecurityCache.init();
+
+        //初始化字典缓存
+        DictConstants.init();
+    }
 }

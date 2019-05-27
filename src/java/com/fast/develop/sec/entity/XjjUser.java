@@ -9,151 +9,149 @@ import com.fast.develop.framework.utils.StringUtils;
 
 public class XjjUser extends EntitySupport {
 
-	private String loginName;
-	private String password;
-	private String userName;
-	private String gender;
-	private String mobile;
-	private String email;
-	private String province;
-	private String address;
-	
-	private String userType;
-	private Date createDate;
-	private Date birthday;
-	private String status;
-	List<RoleEntity> roles;
+    private String loginName;
+    private String password;
+    private String userName;
+    private String gender;
+    private String mobile;
+    private String email;
+    private String province;
+    private String address;
 
-	public XjjUser() {
-	}
-	
-	public XjjUser(long id, String loginName, String password, String userName,
-			String mobile, String email, String address, String userType,
-			Date createDate, String status) {
-		super();
-		this.id = id;
-		this.loginName = loginName;
-		this.password = password;
-		this.userName = userName;
-		this.mobile = mobile;
-		this.email = email;
-		this.address = address;
-		this.userType = userType;
-		this.createDate = createDate;
-		this.status = status;
-	}
+    private String userType;
+    private Date createDate;
+    private Date birthday;
+    private String status;
+    List<RoleEntity> roles;
 
-	public String getLoginName() {
-		return loginName;
-	}
+    public XjjUser() {
+    }
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
+    public XjjUser(long id, String loginName, String password, String userName,
+                   String mobile, String email, String address, String userType,
+                   Date createDate, String status) {
+        super();
+        this.id = id;
+        this.loginName = loginName;
+        this.password = password;
+        this.userName = userName;
+        this.mobile = mobile;
+        this.email = email;
+        this.address = address;
+        this.userType = userType;
+        this.createDate = createDate;
+        this.status = status;
+    }
 
-	public String getPassword() {
-		
-		if(StringUtils.isBlank(password))
-		{
-			return XJJConstants.USER_INIT_PASSWORD;
-		}
-		return password;
-	}
+    public String getLoginName() {
+        return loginName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getPassword() {
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+        if (StringUtils.isBlank(password)) {
+            return XJJConstants.USER_INIT_PASSWORD;
+        }
+        return password;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getMobile() {
+        return mobile;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getProvince() {
-		return province;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setProvince(String province) {
-		this.province = province;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getUserType() {
-		return userType;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
+    public String getProvince() {
+        return province;
+    }
 
-	public Date getCreateDate() {
-		return createDate;
-	}
+    public void setProvince(String province) {
+        this.province = province;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public String getUserType() {
+        return userType;
+    }
 
-	public String getStatus() {
-		
-		if(StringUtils.isBlank(status))
-		{
-			return XJJConstants.COMMON_STATUS_VALID;
-		}
-		return status;
-	}
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public String getStatus() {
 
-	public List<RoleEntity> getRoles() {
-		return roles;
-	}
+        if (StringUtils.isBlank(status)) {
+            return XJJConstants.COMMON_STATUS_VALID;
+        }
+        return status;
+    }
 
-	public void setRoles(List<RoleEntity> roles) {
-		this.roles = roles;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
+    }
 }

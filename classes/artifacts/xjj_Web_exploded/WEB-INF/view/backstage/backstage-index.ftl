@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>新境界快速开发框架</title>
+		<title>快速开发框架</title>
 
 		<meta name="description" content="Common UI Features &amp; Elements" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -68,7 +68,7 @@
 				<div class="navbar-header pull-left">
 					<a href="index.html" class="navbar-brand">
 						<small>
-							XJJ快速开发框架
+							jee快速开发框架
 						</small>
 					</a>
 				</div>

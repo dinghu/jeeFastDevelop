@@ -2,13 +2,14 @@
  * Description: Controller for t_sys_xfile
  * Copyright:   Copyright (c) 2018
  * Company:     xjj
- * @author      zhanghejie
- * @version     1.0
+ * @author zhanghejie
+ * @version 1.0
  * @see
-	HISTORY
-	*  2018-05-04 zhanghejie Create File
-**************************************************/
+HISTORY
+ *  2018-05-04 zhanghejie Create File
+ **************************************************/
 package com.fast.develop.sys.xfile.web;
+
 import java.util.Date;
 
 import com.fast.develop.framework.exception.ValidationException;
@@ -37,99 +38,100 @@ import com.fast.develop.framework.security.annotations.SecPrivilege;
 @Controller
 @RequestMapping("/sys/xfile")
 public class XfileController extends SpringControllerSupport {
-	@Autowired
-	private XfileService xfileService;
-	
-	
-	@SecPrivilege(title="文件管理")
-	@RequestMapping(value = "/index")
-	public String index(Model model) {
-		String page = this.getViewPath("index");
-		return page;
-	}
-	
-	@SecList
-	@RequestMapping(value = "/list")
-	public String list(Model model,
-			@QueryParameter XJJParameter query,
-			@ModelAttribute("page") Pagination page
-			) {
-		page = xfileService.findPage(query,page);
-		return getViewPath("list");
-	}
-	
-	@SecCreate
-	@RequestMapping("/input")
-	public String create(@ModelAttribute("xfile") XfileEntity xfile, Model model){
-		return getViewPath("input");
-	}
-	
-	@SecEdit
-	@RequestMapping("/input/{id}")
-	public String edit(@PathVariable("id") Long id, Model model){
-		XfileEntity xfile = xfileService.getById(id);
-		model.addAttribute("xfile",xfile);
-		return getViewPath("input");
-	}
-	
-	@SecCreate
-	@SecEdit
-	@RequestMapping("/save")
-	public @ResponseBody
-    XjjJson save(@ModelAttribute XfileEntity xfile){
-		
-		validateSave(xfile);
-		if(xfile.isNew())
-		{
-			xfile.setCreateDate(new Date());
-			xfileService.save(xfile);
-		}else
-		{
-			xfileService.update(xfile);
-		}
-		return XjjJson.success("保存成功");
-	}
-	
-	
-	/**
-	 * 数据校验
-	 **/
-	private void validateSave(XfileEntity xfile){
-		//必填项校验
-		// 判断file_realname是否为空
-		if(null==xfile.getFileRealname()){
-			throw new ValidationException("校验失败，file_realname不能为空！");
-		}
-		// 判断file_path是否为空
-		if(null==xfile.getFilePath()){
-			throw new ValidationException("校验失败，file_path不能为空！");
-		}
-		// 判断file_title是否为空
-		if(null==xfile.getFileTitle()){
-			throw new ValidationException("校验失败，file_title不能为空！");
-		}
-		// 判断create_date是否为空
-		if(null==xfile.getCreateDate()){
-			throw new ValidationException("校验失败，create_date不能为空！");
-		}
-	}
-	
-	@SecDelete
-	@RequestMapping("/delete/{id}")
-	public @ResponseBody XjjJson delete(@PathVariable("id") Long id){
-		xfileService.delete(id);
-		return XjjJson.success("成功删除1条");
-	}
-	@SecDelete
-	@RequestMapping("/delete")
-	public @ResponseBody XjjJson delete(@RequestParam("ids") Long[] ids){
-		if(ids == null || ids.length == 0){
-			return XjjJson.error("没有选择删除记录");
-		}
-		for(Long id : ids){
-			xfileService.delete(id);
-		}
-		return XjjJson.success("成功删除"+ids.length+"条");
-	}
+    @Autowired
+    private XfileService xfileService;
+
+
+    @SecPrivilege(title = "文件管理")
+    @RequestMapping(value = "/index")
+    public String index(Model model) {
+        String page = this.getViewPath("index");
+        return page;
+    }
+
+    @SecList
+    @RequestMapping(value = "/list")
+    public String list(Model model,
+                       @QueryParameter XJJParameter query,
+                       @ModelAttribute("page") Pagination page
+    ) {
+        page = xfileService.findPage(query, page);
+        return getViewPath("list");
+    }
+
+    @SecCreate
+    @RequestMapping("/input")
+    public String create(@ModelAttribute("xfile") XfileEntity xfile, Model model) {
+        return getViewPath("input");
+    }
+
+    @SecEdit
+    @RequestMapping("/input/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        XfileEntity xfile = xfileService.getById(id);
+        model.addAttribute("xfile", xfile);
+        return getViewPath("input");
+    }
+
+    @SecCreate
+    @SecEdit
+    @RequestMapping("/save")
+    public @ResponseBody
+    XjjJson save(@ModelAttribute XfileEntity xfile) {
+
+        validateSave(xfile);
+        if (xfile.isNew()) {
+            xfile.setCreateDate(new Date());
+            xfileService.save(xfile);
+        } else {
+            xfileService.update(xfile);
+        }
+        return XjjJson.success("保存成功");
+    }
+
+
+    /**
+     * 数据校验
+     **/
+    private void validateSave(XfileEntity xfile) {
+        //必填项校验
+        // 判断file_realname是否为空
+        if (null == xfile.getFileRealname()) {
+            throw new ValidationException("校验失败，file_realname不能为空！");
+        }
+        // 判断file_path是否为空
+        if (null == xfile.getFilePath()) {
+            throw new ValidationException("校验失败，file_path不能为空！");
+        }
+        // 判断file_title是否为空
+        if (null == xfile.getFileTitle()) {
+            throw new ValidationException("校验失败，file_title不能为空！");
+        }
+        // 判断create_date是否为空
+        if (null == xfile.getCreateDate()) {
+            throw new ValidationException("校验失败，create_date不能为空！");
+        }
+    }
+
+    @SecDelete
+    @RequestMapping("/delete/{id}")
+    public @ResponseBody
+    XjjJson delete(@PathVariable("id") Long id) {
+        xfileService.delete(id);
+        return XjjJson.success("成功删除1条");
+    }
+
+    @SecDelete
+    @RequestMapping("/delete")
+    public @ResponseBody
+    XjjJson delete(@RequestParam("ids") Long[] ids) {
+        if (ids == null || ids.length == 0) {
+            return XjjJson.error("没有选择删除记录");
+        }
+        for (Long id : ids) {
+            xfileService.delete(id);
+        }
+        return XjjJson.success("成功删除" + ids.length + "条");
+    }
 }
 

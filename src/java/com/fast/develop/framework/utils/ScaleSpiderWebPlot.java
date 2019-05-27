@@ -17,8 +17,8 @@ import org.jfree.data.category.CategoryDataset;
 
 /**
  * 雷达图
- * @author silane
  *
+ * @author silane
  */
 public class ScaleSpiderWebPlot extends SpiderWebPlot {
     private static final long serialVersionUID = 4005814203754627127L;
@@ -31,30 +31,30 @@ public class ScaleSpiderWebPlot extends SpiderWebPlot {
     private static final int DEFAULT_GAP = 10;
     private static final double THRESHOLD = 15;
 
-	ScaleSpiderWebPlot(CategoryDataset createCategoryDataset) {
+    ScaleSpiderWebPlot(CategoryDataset createCategoryDataset) {
         super(createCategoryDataset);
     }
 
     /**
-	 * @return 每个轴的刻度数
-	 */
-	public int getTicks() {
-		return ticks;
-	}
+     * @return 每个轴的刻度数
+     */
+    public int getTicks() {
+        return ticks;
+    }
 
-	/**
-	 * @param 每个轴的刻度数
-	 */
-	public void setTicks(int ticks) {
-		if(ticks < 1){
-			ticks = 1;
-		}
-		this.ticks = ticks;
-	}
-	
+    /**
+     * @param 每个轴的刻度数
+     */
+    public void setTicks(int ticks) {
+        if (ticks < 1) {
+            ticks = 1;
+        }
+        this.ticks = ticks;
+    }
+
     protected void drawLabel(final Graphics2D g2, final Rectangle2D plotArea,
-            final double value, final int cat, final double startAngle,
-            final double extent) {
+                             final double value, final int cat, final double startAngle,
+                             final double extent) {
         super.drawLabel(g2, plotArea, value, cat, startAngle, extent);
         final FontRenderContext frc = g2.getFontRenderContext();
         final double[] transformed = new double[2];

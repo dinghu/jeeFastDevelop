@@ -3,156 +3,143 @@ package com.fast.develop.sys.code.entity;
 import com.fast.develop.framework.utils.StringUtils;
 
 
-public class ColumnInfo{
-	
-	//数据库属性
-	private String columnName;
-	private String dataType;
-	private String columnComment;
-	private String isNullable;//是否可为空
-	
-	
-	
-	//对应类属性
-	private boolean search = false;
-	private boolean required= false;
-	private String propName;
-	private String propType;
-	//private String checkType;
+public class ColumnInfo {
 
-	public ColumnInfo() {
-		
-	}
+    //数据库属性
+    private String columnName;
+    private String dataType;
+    private String columnComment;
+    private String isNullable;//是否可为空
 
-	public String getColumnName() {
-		return columnName;
-	}
 
-	public void setColumnName(String columnName) {
-		this.columnName = columnName;
-	}
+    //对应类属性
+    private boolean search = false;
+    private boolean required = false;
+    private String propName;
+    private String propType;
+    //private String checkType;
 
-	public String getDataType() {
-		return dataType;
-	}
+    public ColumnInfo() {
 
-	public void setDataType(String dataType) {
-		this.dataType = dataType;
-	}
+    }
 
-	public String getColumnComment() {
-		if(StringUtils.isBlank(columnComment))
-		{
-			return columnName;
-		}
-		return columnComment;
-	}
+    public String getColumnName() {
+        return columnName;
+    }
 
-	public void setColumnComment(String columnComment) {
-		this.columnComment = columnComment;
-	}
-	
-	public String getIsNullable() {
-		return isNullable;
-	}
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
 
-	public void setIsNullable(String isNullable) {
-		this.isNullable = isNullable;
-	}
+    public String getDataType() {
+        return dataType;
+    }
 
-	public boolean isSearch() {
-		return search;
-	}
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
 
-	public void setSearch(boolean search) {
-		this.search = search;
-	}
+    public String getColumnComment() {
+        if (StringUtils.isBlank(columnComment)) {
+            return columnName;
+        }
+        return columnComment;
+    }
 
-	public boolean isRequired() {
-		if("no".equalsIgnoreCase(isNullable))
-		{
-			required = true ;
-		}
-		
-		return required;
-	}
+    public void setColumnComment(String columnComment) {
+        this.columnComment = columnComment;
+    }
 
-	public String getPropName() {
-		propName = StringUtils.toCamelCase(columnName);
-		return propName;
-	}
+    public String getIsNullable() {
+        return isNullable;
+    }
 
-	public void setPropName(String propName) {
-		this.propName = propName;
-	}
+    public void setIsNullable(String isNullable) {
+        this.isNullable = isNullable;
+    }
 
-	public String getPropType() {
-		
-		propType = "String";
-		
-		if(dataType.toLowerCase().contains("bigint"))
-		{
-			propType=  "Long";
-		}
-		
-		if(dataType.toLowerCase().contains("int"))
-		{
-			propType=  "Integer";
-		}
-		
-		if (dataType.toLowerCase().contains("varchar")
-				|| dataType.toLowerCase().contains("text"))
-		{
-			propType=  "String";
-		}
-		
-		if(dataType.toLowerCase().contains("date"))
-		{
-			propType=  "Date";
-		}
-		if(dataType.toLowerCase().contains("float"))
-		{
-			propType=  "Float";
-		}
-		if(dataType.toLowerCase().contains("double"))
-		{
-			propType= "Double";
-		}
-		if(dataType.toLowerCase().contains("decimal"))
-		{
-			propType= "BigDecimal";
-		}
-		
-		return propType;
-	}
+    public boolean isSearch() {
+        return search;
+    }
 
-	public void setPropType(String propType) {
-		this.propType = propType;
-	}
-	
+    public void setSearch(boolean search) {
+        this.search = search;
+    }
 
-	public String getCheckType() {
-		String checkType = "";
-		if(isRequired())
-		{
-			checkType+="required";
-		}
-		
-		
-		if("Long".equals(getPropType()) || "Integer".equals(getPropType()))
-		{
-			if(!StringUtils.isBlank(checkType))
-			{
-				checkType+=" ";
-			}
-			checkType+="number";
-		}
-		
-		return checkType;
-	}
+    public boolean isRequired() {
+        if ("no".equalsIgnoreCase(isNullable)) {
+            required = true;
+        }
 
-	@Override
-	public String toString() {
-		return new StringBuffer(getClass().getName()).append(":columnName=").append(getColumnName()).toString();
-	}
+        return required;
+    }
+
+    public String getPropName() {
+        propName = StringUtils.toCamelCase(columnName);
+        return propName;
+    }
+
+    public void setPropName(String propName) {
+        this.propName = propName;
+    }
+
+    public String getPropType() {
+
+        propType = "String";
+
+        if (dataType.toLowerCase().contains("bigint")) {
+            propType = "Long";
+        }
+
+        if (dataType.toLowerCase().contains("int")) {
+            propType = "Integer";
+        }
+
+        if (dataType.toLowerCase().contains("varchar")
+                || dataType.toLowerCase().contains("text")) {
+            propType = "String";
+        }
+
+        if (dataType.toLowerCase().contains("date")) {
+            propType = "Date";
+        }
+        if (dataType.toLowerCase().contains("float")) {
+            propType = "Float";
+        }
+        if (dataType.toLowerCase().contains("double")) {
+            propType = "Double";
+        }
+        if (dataType.toLowerCase().contains("decimal")) {
+            propType = "BigDecimal";
+        }
+
+        return propType;
+    }
+
+    public void setPropType(String propType) {
+        this.propType = propType;
+    }
+
+
+    public String getCheckType() {
+        String checkType = "";
+        if (isRequired()) {
+            checkType += "required";
+        }
+
+
+        if ("Long".equals(getPropType()) || "Integer".equals(getPropType())) {
+            if (!StringUtils.isBlank(checkType)) {
+                checkType += " ";
+            }
+            checkType += "number";
+        }
+
+        return checkType;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuffer(getClass().getName()).append(":columnName=").append(getColumnName()).toString();
+    }
 }

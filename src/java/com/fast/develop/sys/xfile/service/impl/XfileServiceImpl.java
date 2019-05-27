@@ -2,12 +2,12 @@
  * Description: ServiceImpl for t_sys_xfile
  * Copyright:   Copyright (c) 2018
  * Company:     xjj
- * @author      zhanghejie
- * @version     1.0
+ * @author zhanghejie
+ * @version 1.0
  * @see
-	HISTORY
-    *  2018-05-04 zhanghejie Create File
-**************************************************/
+HISTORY
+ *  2018-05-04 zhanghejie Create File
+ **************************************************/
 
 package com.fast.develop.sys.xfile.service.impl;
 
@@ -22,12 +22,12 @@ import com.fast.develop.sys.xfile.dao.XfileDao;
 @Service
 public class XfileServiceImpl extends XjjServiceSupport<XfileEntity> implements XfileService {
 
-	@Autowired
-	private XfileDao xfileDao;
+    @Autowired
+    private XfileDao xfileDao;
 
-	@Override
-	public XjjDAO<XfileEntity> getDao() {
-		
-		return xfileDao;
-	}
+    @Override
+    public XjjDAO<XfileEntity> getDao() {
+
+        return xfileDao;
+    }
 }

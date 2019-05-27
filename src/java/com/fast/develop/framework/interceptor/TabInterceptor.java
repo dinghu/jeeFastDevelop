@@ -8,37 +8,36 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fast.develop.framework.utils.StringUtils;
 
-public class TabInterceptor implements HandlerInterceptor  {
+public class TabInterceptor implements HandlerInterceptor {
 
-	private static final String TAB_PRE = "tab_";
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-		return true;
-	}
+    private static final String TAB_PRE = "tab_";
 
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		//接收tabId
-		String tabId = request.getParameter("tabId");
-		if(!StringUtils.isBlank(tabId) && null!=modelAndView)
-		{
-			modelAndView.addObject("tabId", tabId.replace(TAB_PRE,""));
-		}
-		
-		//接收nav导航信息
-		String navs = request.getParameter("navs");
-		if(!StringUtils.isBlank(navs) && null!=modelAndView)
-		{
-			modelAndView.addObject("navArr", navs.split(","));
-		}
-		
-	}
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response, Object handler) throws Exception {
+        return true;
+    }
 
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		
-	}   
+    public void postHandle(HttpServletRequest request,
+                           HttpServletResponse response, Object handler,
+                           ModelAndView modelAndView) throws Exception {
+        //接收tabId
+        String tabId = request.getParameter("tabId");
+        if (!StringUtils.isBlank(tabId) && null != modelAndView) {
+            modelAndView.addObject("tabId", tabId.replace(TAB_PRE, ""));
+        }
+
+        //接收nav导航信息
+        String navs = request.getParameter("navs");
+        if (!StringUtils.isBlank(navs) && null != modelAndView) {
+            modelAndView.addObject("navArr", navs.split(","));
+        }
+
+    }
+
+    public void afterCompletion(HttpServletRequest request,
+                                HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+
+    }
 
 }

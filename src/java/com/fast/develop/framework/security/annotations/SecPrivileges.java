@@ -8,17 +8,19 @@ import java.lang.annotation.Target;
 
 /**
  * 权限集合标注
+ *
  * @author xjj
  */
 @Inherited
-@Target( ElementType.METHOD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SecPrivileges {
-	
-	/**
-	 * 	权限集合；
-	 * @return
-	 */
-	public SecPrivilege[] value();
-	
+
+    /**
+     * 权限集合；
+     *
+     * @return
+     */
+    public SecPrivilege[] value();
+
 }

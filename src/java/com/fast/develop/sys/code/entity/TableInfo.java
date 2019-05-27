@@ -3,44 +3,41 @@ package com.fast.develop.sys.code.entity;
 import com.fast.develop.framework.utils.StringUtils;
 
 
-public class TableInfo{
-	
-	private String tableName;
-	private String tableComment;
+public class TableInfo {
 
-	public TableInfo() {
-		
-	}
-	
-	public String getTableName() {
-		return tableName;
-	}
+    private String tableName;
+    private String tableComment;
 
+    public TableInfo() {
 
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
 
 
-
-	public String getTableComment() {
-		
-		if(StringUtils.isBlank(tableComment))
-		{
-			return tableName;
-		}
-		return tableComment;
-	}
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
 
 
+    public String getTableComment() {
 
-	public void setTableComment(String tableComment) {
-		this.tableComment = tableComment;
-	}
+        if (StringUtils.isBlank(tableComment)) {
+            return tableName;
+        }
+        return tableComment;
+    }
 
 
-	@Override
-	public String toString() {
-		return new StringBuffer(getClass().getName()).append(":tableName=").append(getTableName()).toString();
-	}
+    public void setTableComment(String tableComment) {
+        this.tableComment = tableComment;
+    }
+
+
+    @Override
+    public String toString() {
+        return new StringBuffer(getClass().getName()).append(":tableName=").append(getTableName()).toString();
+    }
 }

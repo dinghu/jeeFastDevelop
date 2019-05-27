@@ -1,15 +1,15 @@
 package com.fast.develop.framework.exception;
 
 
-public class DataAccessException extends Exception{
-	static final long serialVersionUID = -7034897190745766939L;
+public class DataAccessException extends Exception {
+    static final long serialVersionUID = -7034897190745766939L;
 
     public DataAccessException() {
-    	super();
+        super();
     }
 
     public DataAccessException(String message) {
-    	super(message);
+        super(message);
     }
 
     public DataAccessException(String message, Throwable cause) {

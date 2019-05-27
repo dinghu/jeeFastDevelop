@@ -13,23 +13,21 @@ import org.springframework.stereotype.Service;
 public class CodeServiceImpl implements CodeService {
 
 
-	@Autowired
-	private CodeDao codeDao;
-	
-	public List<String> findTableList()
-	{
-		return codeDao.findTableList();
-	}
-	public List<ColumnInfo> findColumnsByTable(String tableName)
-	{
-		String dbName = codeDao.getDataBaseName();
-		
-		return codeDao.findColumnsByTable(tableName,dbName);
-	}
-	
-	public TableInfo getTableInfoByName(String tableName)
-	{
-		String dbName = codeDao.getDataBaseName();
-		return codeDao.getTableInfoByName(tableName,dbName);
-	}
+    @Autowired
+    private CodeDao codeDao;
+
+    public List<String> findTableList() {
+        return codeDao.findTableList();
+    }
+
+    public List<ColumnInfo> findColumnsByTable(String tableName) {
+        String dbName = codeDao.getDataBaseName();
+
+        return codeDao.findColumnsByTable(tableName, dbName);
+    }
+
+    public TableInfo getTableInfoByName(String tableName) {
+        String dbName = codeDao.getDataBaseName();
+        return codeDao.getTableInfoByName(tableName, dbName);
+    }
 }

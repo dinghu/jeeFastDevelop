@@ -1,12 +1,12 @@
 /****************************************************
- * Description: ServiceImpl for ${model.label}
- * Copyright:   Copyright (c) ${model.year}
- * Company:     ${model.company}
- * @author      ${model.author}
- * @version     ${model.version}
- * @see
-	HISTORY
-    *  ${model.date} ${model.author} Create File
+* Description: ServiceImpl for ${model.label}
+* Copyright:   Copyright (c) ${model.year}
+* Company:     ${model.company}
+* @author      ${model.author}
+* @version     ${model.version}
+* @see
+HISTORY
+*  ${model.date} ${model.author} Create File
 **************************************************/
 
 package ${model.packageForServiceImpl};
@@ -20,14 +20,16 @@ import ${model.packageForDAO}.${model.name?cap_first}Dao;
 import ${model.packageForService}.${model.name?cap_first}Service;
 
 @Service
-public class ${model.name?cap_first}ServiceImpl extends XjjServiceSupport<${model.name?cap_first}Entity> implements ${model.name?cap_first}Service {
+public class ${model.name?cap_first}ServiceImpl extends XjjServiceSupport
+<${model.name?cap_first}Entity> implements ${model.name?cap_first}Service {
 
-	@Autowired
-	private ${model.name?cap_first}Dao ${model.name?uncap_first}Dao;
+    @Autowired
+    private ${model.name?cap_first}Dao ${model.name?uncap_first}Dao;
 
-	@Override
-	public XjjDAO<${model.name?cap_first}Entity> getDao() {
-		
-		return ${model.name?uncap_first}Dao;
-	}
-}
+    @Override
+    public XjjDAO
+    <${model.name?cap_first}Entity> getDao() {
+
+        return ${model.name?uncap_first}Dao;
+        }
+        }
