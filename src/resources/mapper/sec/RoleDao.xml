@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fast.develop.sec.dao.RoleDao">
-	<select id="getById" resultType="RoleEntity" parameterType="long">
+    <select id="getById" resultType="RoleEntity" parameterType="long">
 		SELECT
 			*
 		FROM
@@ -11,8 +11,8 @@
 		WHERE
 			id = #{id}
 	</select>
-	
-	<select id="getByCode" resultType="RoleEntity" parameterType="java.lang.String">
+
+    <select id="getByCode" resultType="RoleEntity" parameterType="java.lang.String">
 		SELECT
 			*
 		FROM
@@ -20,27 +20,27 @@
 		WHERE
 			code = #{code}
 	</select>
-	
-	<select id="findPage" resultType="RoleEntity">
-		SELECT
-			*
-		FROM
-			t_sec_role
-		<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
-		LIMIT #{offset}, #{limit}
-	</select>
-	
-	<select id="findAll" resultType="RoleEntity">
+
+    <select id="findPage" resultType="RoleEntity">
+        SELECT
+        *
+        FROM
+        t_sec_role
+        <include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+        <include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="findAll" resultType="RoleEntity">
 		SELECT * FROM t_sec_role
 	</select>
-	
-	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.RoleEntity">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.RoleEntity">
 		insert into t_sec_role(ID,TITLE,CODE,DESCRIPTION,status)
     	values(#{id},#{title},#{code},#{description},#{status})
 	</insert>
-	
-	<update id="update" parameterType="RoleEntity">  
+
+    <update id="update" parameterType="RoleEntity">
         UPDATE t_sec_role SET 
              ID = #{id},
              TITLE = #{title},
@@ -49,19 +49,19 @@
              status = #{status}
         WHERE id = #{id};     
 	</update>
-		
-	<delete id="delete" parameterType="long">  
+
+    <delete id="delete" parameterType="long">
         DELETE FROM t_sec_role WHERE id = #{id}  
-	</delete> 
-	
-	<select id="getCount" resultType="java.lang.Integer">         
-    	select count(id) from t_sec_role 
-    	<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
-	</select> 
-	
-	
-	<select id="findListNoUser" resultType="RoleEntity" parameterType="long">
+	</delete>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(id) from t_sec_role
+        <include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+        <include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
+    </select>
+
+
+    <select id="findListNoUser" resultType="RoleEntity" parameterType="long">
 		SELECT
 			*
 		FROM
@@ -69,16 +69,16 @@
 		where id not in(select ur.ROLE_ID from t_sec_user_role ur where ur.USER_ID=#{userId})
 		ORDER BY id
 	</select>
-	
-	<select id="findListByUserId" resultType="RoleEntity" parameterType="long">
+
+    <select id="findListByUserId" resultType="RoleEntity" parameterType="long">
 		SELECT
 			*
 		FROM
 			t_sec_role 
 		where id in(select ur.ROLE_ID from t_sec_user_role ur where ur.USER_ID=#{userId})
 	</select>
-	
-	<select id="findPrivilegeByRole" resultType="RolePrivilegeEntity" parameterType="long">
+
+    <select id="findPrivilegeByRole" resultType="RolePrivilegeEntity" parameterType="long">
 		SELECT
 			*
 		FROM

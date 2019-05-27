@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fast.develop.sec.dao.UserRoleDao">
-	<select id="getById" resultType="UserRoleEntity" parameterType="long">
+    <select id="getById" resultType="UserRoleEntity" parameterType="long">
 		SELECT
 			*
 		FROM
@@ -11,59 +11,60 @@
 		WHERE
 			id = #{id}
 	</select>
-	
-	<select id="findPage" resultType="UserRoleEntity">
-		SELECT
-			*
-		FROM
-			t_sec_user_role
-		where 1=1 
-		<if test="param.name!=null">
-             and name=#{param.name}
+
+    <select id="findPage" resultType="UserRoleEntity">
+        SELECT
+        *
+        FROM
+        t_sec_user_role
+        where 1=1
+        <if test="param.name!=null">
+            and name=#{param.name}
         </if>
-	
+
         <if test="param.status!=null">
-             and status=#{param.status}
+            and status=#{param.status}
         </if>
-		ORDER BY
-			id
-		LIMIT #{offset}, #{limit}
-	</select>
-	
-	<select id="findAll" resultType="UserRoleEntity">
+        ORDER BY
+        id
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="findAll" resultType="UserRoleEntity">
 		SELECT * FROM t_sec_user_role
 	</select>
-	
-	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.UserRoleEntity">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.fast.develop.sec.entity.UserRoleEntity">
 		insert into t_sec_user_role(ID,USER_ID,ROLE_ID)
     	values(#{id},#{userId},#{roleId})
 	</insert>
-	
-	<update id="update" parameterType="UserRoleEntity">  
+
+    <update id="update" parameterType="UserRoleEntity">
         UPDATE t_sec_user_role SET 
              ID = #{id},
              USER_ID = #{userId},
              ROLE_ID = #{roleId}
         WHERE id = #{id};     
 	</update>
-		
-	<delete id="delete" parameterType="long">  
+
+    <delete id="delete" parameterType="long">
         DELETE FROM t_sec_user_role WHERE id = #{id}  
-	</delete> 
-	<delete id="deleteBy2Id" parameterType="long">  
+	</delete>
+    <delete id="deleteBy2Id" parameterType="long">
         DELETE FROM t_sec_user_role WHERE user_id = #{userId} and role_id=#{roleId}
-	</delete> 
-	
-	<select id="getCount" resultType="java.lang.Integer">         
-    	select count(id) from t_sec_user_role 
-    	where 1=1 
-		<if test="param.name!=null">
-             and name=#{param.name}
+	</delete>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(id) from t_sec_user_role
+        where 1=1
+        <if test="param.name!=null">
+            and name=#{param.name}
         </if>
         <if test="param.status!=null">
-             and status=#{param.status}
+            and status=#{param.status}
         </if>
-	</select> 
-    
+    </select>
+
 </mapper>
 
