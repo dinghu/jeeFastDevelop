@@ -10,19 +10,19 @@
     *  2018-05-04 zhanghejie Create File
 **************************************************/
 -->
-<#include "/templates/xjj-index.ftl"> 
+<#include "/templates/xjj-index.ftl">
 
 <@input url="${base}/sys/xfile/save" id=tabId>
-   <input type="hidden" name="id" value="${xfile.id}"/>
-   
-   <@formgroup title='系统名称'>
-	<input type="text" name="fileRealname" value="${xfile.fileRealname}" check-type="required">
-   </@formgroup>
-   <@formgroup title='文件路径'>
-	<input type="text" name="filePath" value="${xfile.filePath}" check-type="required">
-   </@formgroup>
-   <@formgroup title='文件名称'>
-	<input type="text" name="fileTitle" value="${xfile.fileTitle}" check-type="required">
-   </@formgroup>
-  
+    <input type="hidden" name="id" value="${xfile.id}"/>
+
+    <@formgroup title='系统名称'>
+        <input type="text" name="fileRealname" value="${xfile.fileRealname}" check-type="required">
+    </@formgroup>
+    <@formgroup title='文件路径'>
+        <input type="text" name="filePath" value="${xfile.filePath}" check-type="required">
+    </@formgroup>
+    <@formgroup title='文件名称'>
+        <input type="text" name="fileTitle" value="${xfile.fileTitle}" check-type="required">
+    </@formgroup>
+
 </@input>
