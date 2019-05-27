@@ -46,7 +46,7 @@
 		<!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 扫描entity包 使用别名 -->
-		<property name="typeAliasesPackage" value="com.xjj" />
+		<property name="typeAliasesPackage" value="com.fast.develop" />
 		<!-- 扫描sql配置文件:mapper需要的xml文件 -->
 		<property name="mapperLocations" value="classpath:mapper/**/*.xml" />
 	</bean>
@@ -57,7 +57,7 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<!-- 给出需要扫描Dao接口包 -->
 		<property name="basePackage">
-			<value>com.xjj.**.dao</value>
+			<value>com.fast.develop.**.dao</value>
 		</property>
 	</bean>
 	<!--整合mybatis结束-->
@@ -65,7 +65,7 @@
 	 
 	 
 	 <!-- 扫描web相关的bean -->
-	<context:component-scan base-package="com.xjj" />
+	<context:component-scan base-package="com.fast.develop" />
 	 
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
@@ -107,7 +107,7 @@
 	 <mvc:interceptors>
 	     <mvc:interceptor>
 	         <mvc:mapping path="/**"/>
-	         <bean class="com.xjj.framework.interceptor.TabInterceptor"></bean>
+	         <bean class="com.fast.develop.framework.interceptor.TabInterceptor"></bean>
 	     </mvc:interceptor>
 	     
 	     
@@ -116,7 +116,7 @@
            	 <mvc:exclude-mapping path="/"/>
            	 <mvc:exclude-mapping path="/fore/**"/>
            	 <mvc:exclude-mapping path="/passport/**"/>
-	         <bean class="com.xjj.framework.interceptor.LoginInterceptor"></bean>
+	         <bean class="com.fast.develop.framework.interceptor.LoginInterceptor"></bean>
 	     </mvc:interceptor>
 	 </mvc:interceptors>
 	 
@@ -142,8 +142,8 @@
        class="org.springframework.beans.factory.config.PropertiesFactoryBean"> 
        <property name="location" value="classpath:config/freemarkerstatic.properties"/> 
    	</bean>
-   	<bean id="freemarkerStaticModels" 
-       class="com.xjj.framework.freemarker.FreemarkerStaticModels" factory-method="getInstance">
+   	<bean id="freemarkerStaticModels"
+          class="com.fast.develop.framework.freemarker.FreemarkerStaticModels" factory-method="getInstance">
        <property name="staticModels" ref="freemarkerStaticModelsProps"/>
    	</bean>
    	
@@ -151,7 +151,7 @@
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass"
-			value="com.xjj.framework.freemarker.FreeMarkerView"></property>
+			value="com.fast.develop.framework.freemarker.FreeMarkerView"></property>
 		<!-- property name="prefix" value="/WEB-INF/view/" / -->
 		<property name="suffix" value=".ftl" />
 		<property name="contentType" value="text/html;charset=utf-8" />
@@ -169,14 +169,14 @@
 	      </bean>
 	    </mvc:message-converters>
 		<mvc:argument-resolvers>
-		  <bean class="com.xjj.framework.web.support.QueryParameterMethodArgumentResolver"></bean>
+		  <bean class="com.fast.develop.framework.web.support.QueryParameterMethodArgumentResolver"></bean>
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <list>
-                <bean class="com.xjj.framework.web.converter.StringDateConverter"/>
+                <bean class="com.fast.develop.framework.web.converter.StringDateConverter"/>
             </list>
         </property>
     </bean>
@@ -189,7 +189,7 @@
 	    </mvc:interceptor>
 	    <mvc:interceptor>
 	        <mvc:mapping path="/**"/>
-	        <bean class="com.xjj.framework.interceptor.I18NInterceptor" />  
+	        <bean class="com.fast.develop.framework.interceptor.I18NInterceptor" />
 	    </mvc:interceptor>
     </mvc:interceptors>
     
@@ -206,5 +206,5 @@
          <property name="useCodeAsDefaultMessage" value="true" />  
     </bean>  
     <!-- 异常 -->
-    <bean id="exceptionHandler" class="com.xjj.framework.exception.XjjHandlerExceptionResolver"/>
+    <bean id="exceptionHandler" class="com.fast.develop.framework.exception.XjjHandlerExceptionResolver"/>
 </beans>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xjj.sys.dict.dao.DictDao">
+<mapper namespace="com.fast.develop.sys.dict.dao.DictDao">
 	<select id="getById" resultType="DictItem" parameterType="long">
 		SELECT
 			*
@@ -17,8 +17,8 @@
 			*
 		FROM
 			t_sys_dict
-		<include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -28,11 +28,11 @@
 	
 	<select id="findList" resultType="DictItem">
 		SELECT * FROM t_sys_dict
-		<include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 	</select>
 	
-	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.xjj.sys.dict.entity.DictItem">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sys.dict.entity.DictItem">
 		insert into t_sys_dict(name,group_code,code,detail,status,sn)
     	values(#{name},#{groupCode},#{code},#{detail},#{status},#{sn})
 	</insert>
@@ -55,8 +55,8 @@
 	
 	<select id="getCount" resultType="java.lang.Integer">         
     	select count(id) from t_sys_dict 
-    	<include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+    	<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 	</select> 
 	
 </mapper>

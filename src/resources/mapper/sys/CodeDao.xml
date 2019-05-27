@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xjj.sys.code.dao.CodeDao">
+<mapper namespace="com.fast.develop.sys.code.dao.CodeDao">
 	<select id="getDataBaseName" resultType="java.lang.String">
 		select database()
 	</select>

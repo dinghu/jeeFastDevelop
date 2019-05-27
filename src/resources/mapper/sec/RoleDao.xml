@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xjj.sec.dao.RoleDao">
+<mapper namespace="com.fast.develop.sec.dao.RoleDao">
 	<select id="getById" resultType="RoleEntity" parameterType="long">
 		SELECT
 			*
@@ -26,8 +26,8 @@
 			*
 		FROM
 			t_sec_role
-		<include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -35,7 +35,7 @@
 		SELECT * FROM t_sec_role
 	</select>
 	
-	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.xjj.sec.entity.RoleEntity">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.RoleEntity">
 		insert into t_sec_role(ID,TITLE,CODE,DESCRIPTION,status)
     	values(#{id},#{title},#{code},#{description},#{status})
 	</insert>
@@ -56,8 +56,8 @@
 	
 	<select id="getCount" resultType="java.lang.Integer">         
     	select count(id) from t_sec_role 
-    	<include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+    	<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 	</select> 
 	
 	

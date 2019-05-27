@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xjj.sec.dao.UserDao">
+<mapper namespace="com.fast.develop.sec.dao.UserDao">
 	<select id="getById" resultType="XjjUser" parameterType="long">
 		SELECT
 			*
@@ -16,7 +16,7 @@
 		SELECT * FROM t_sec_user
 	</select>
 	
-    <resultMap type="com.xjj.sec.entity.XjjUser" id="userMap">
+    <resultMap type="com.fast.develop.sec.entity.XjjUser" id="userMap">
         <id column="id" property="id"/>
         <result column="login_name" property="loginName"/>
         <result column="password" property="password"/>
@@ -30,7 +30,7 @@
         <result column="birthday" property="birthday"/>
         <result column="status" property="status"/>
         
-        <collection property="roles" ofType="com.xjj.sec.entity.RoleEntity">
+        <collection property="roles" ofType="com.fast.develop.sec.entity.RoleEntity">
             <id property="id" column="roleId" javaType="java.lang.Long" />
             <result property="title" column="title" javaType="java.lang.String" />
         </collection>
@@ -56,7 +56,7 @@
 		LIMIT #{offset}, #{limit}
 	</select>
 	
-	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.xjj.sec.entity.XjjUser">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.XjjUser">
 		insert into t_sec_user(login_name,password,user_name,user_type,email,mobile,create_date,status,birthday,province)
     	values(#{loginName},#{password},#{userName},#{userType},#{email},#{mobile},#{createDate},#{status},#{birthday},#{province})
 	</insert>
@@ -84,7 +84,7 @@
 	
 	<select id="getCount" resultType="java.lang.Integer">         
     	select count(id) from t_sec_user u
-    	<include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
+    	<include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
 	</select> 
 	
 	<select id="findList" resultType="XjjUser">
@@ -92,8 +92,8 @@
 			u.*
 		FROM
 			t_sec_user u
-        <include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+        <include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 	</select>
 	
 	
@@ -102,8 +102,8 @@
 			u.*
 		FROM
 			t_sec_user u
-        <include refid="com.xjj.framework.dao.CommonDao.queryParam"/>
-		<include refid="com.xjj.framework.dao.CommonDao.queryOrder"/>
+        <include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
+		<include refid="com.fast.develop.framework.dao.CommonDao.queryOrder"/>
 		LIMIT #{offset}, #{limit}
 	</select>
 </mapper>
