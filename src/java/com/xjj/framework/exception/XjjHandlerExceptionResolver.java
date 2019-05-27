@@ -234,7 +234,7 @@ public class XjjHandlerExceptionResolver implements HandlerExceptionResolver {
 		content.append("<br><hr><br>").append(getExceptionStackTrace(ex));
 		String to = ConfigUtils.get("mail.errorTo","");
 		String cc = ConfigUtils.get("mail.errorCc","");
-		MailUtils.sendHtmlMail(to, cc, null, subject, content.toString(), false);
+//		MailUtils.sendHtmlMail(to, cc, null, subject, content.toString(), false);
 	}
 	
 	private String getExceptionStackTrace(Exception ex){
