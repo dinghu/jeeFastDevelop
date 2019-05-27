@@ -8,6 +8,7 @@
             <h3 class="panel-title">开发者信息</h3>
         </div>
         <div class="panel-body">
+            作者: hale<br/>
             邮箱: 443409972@qq.com<br/>
             QQ号: 443409972<br/>
         </div>
