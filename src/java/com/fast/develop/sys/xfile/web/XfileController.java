@@ -13,11 +13,11 @@ package com.fast.develop.sys.xfile.web;
 import java.util.Date;
 
 import com.fast.develop.framework.exception.ValidationException;
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.Pagination;
 import com.fast.develop.framework.web.support.QueryParameter;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sys.xfile.entity.XfileEntity;
 import com.fast.develop.sys.xfile.service.XfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class XfileController extends SpringControllerSupport {
     @SecList
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        @ModelAttribute("page") Pagination page
     ) {
         page = xfileService.findPage(query, page);
@@ -77,7 +77,7 @@ public class XfileController extends SpringControllerSupport {
     @SecEdit
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute XfileEntity xfile) {
+    JsonResult save(@ModelAttribute XfileEntity xfile) {
 
         validateSave(xfile);
         if (xfile.isNew()) {
@@ -86,7 +86,7 @@ public class XfileController extends SpringControllerSupport {
         } else {
             xfileService.update(xfile);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 
@@ -116,22 +116,22 @@ public class XfileController extends SpringControllerSupport {
     @SecDelete
     @RequestMapping("/delete/{id}")
     public @ResponseBody
-    XjjJson delete(@PathVariable("id") Long id) {
+    JsonResult delete(@PathVariable("id") Long id) {
         xfileService.delete(id);
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
     @SecDelete
     @RequestMapping("/delete")
     public @ResponseBody
-    XjjJson delete(@RequestParam("ids") Long[] ids) {
+    JsonResult delete(@RequestParam("ids") Long[] ids) {
         if (ids == null || ids.length == 0) {
-            return XjjJson.error("没有选择删除记录");
+            return JsonResult.error("没有选择删除记录");
         }
         for (Long id : ids) {
             xfileService.delete(id);
         }
-        return XjjJson.success("成功删除" + ids.length + "条");
+        return JsonResult.success("成功删除" + ids.length + "条");
     }
 }
 

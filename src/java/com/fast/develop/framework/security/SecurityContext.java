@@ -29,7 +29,7 @@ import com.fast.develop.sec.service.RoleService;
 /**
  * 权限上下文单例类(作废)
  *
- * @author xjj
+ * @author hale
  */
 public class SecurityContext {
     private static SecurityContext securityContext = new SecurityContext();

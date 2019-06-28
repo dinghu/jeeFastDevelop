@@ -9,7 +9,7 @@ package com.fast.develop.framework.exception;
 public class BusinessException extends RuntimeException {
     static final long serialVersionUID = -7034897190745766939L;
 
-    private XjjHandlerExceptionResolver.ReturnType returnType = XjjHandlerExceptionResolver.ReturnType.JSON;
+    private CommonHandlerExceptionResolver.ReturnType returnType = CommonHandlerExceptionResolver.ReturnType.JSON;
 
     /**
      * 业务类异常类
@@ -23,7 +23,7 @@ public class BusinessException extends RuntimeException {
      *
      * @param returnType 返回类型
      */
-    public BusinessException(XjjHandlerExceptionResolver.ReturnType returnType) {
+    public BusinessException(CommonHandlerExceptionResolver.ReturnType returnType) {
         super();
         setReturnType(returnType);
     }
@@ -43,7 +43,7 @@ public class BusinessException extends RuntimeException {
      * @param message    异常内容
      * @param returnType 返回类型
      */
-    public BusinessException(String message, XjjHandlerExceptionResolver.ReturnType returnType) {
+    public BusinessException(String message, CommonHandlerExceptionResolver.ReturnType returnType) {
         super(message);
         setReturnType(returnType);
     }
@@ -65,7 +65,7 @@ public class BusinessException extends RuntimeException {
      * @param cause      异常堆栈
      * @param returnType 返回类型
      */
-    public BusinessException(String message, Throwable cause, XjjHandlerExceptionResolver.ReturnType returnType) {
+    public BusinessException(String message, Throwable cause, CommonHandlerExceptionResolver.ReturnType returnType) {
         super(message, cause);
         setReturnType(returnType);
     }
@@ -85,7 +85,7 @@ public class BusinessException extends RuntimeException {
      * @param cause      异常堆栈
      * @param returnType 返回类型
      */
-    public BusinessException(Throwable cause, XjjHandlerExceptionResolver.ReturnType returnType) {
+    public BusinessException(Throwable cause, CommonHandlerExceptionResolver.ReturnType returnType) {
         super(cause);
         setReturnType(returnType);
     }
@@ -95,7 +95,7 @@ public class BusinessException extends RuntimeException {
      *
      * @return 返回类型
      */
-    public XjjHandlerExceptionResolver.ReturnType getReturnType() {
+    public CommonHandlerExceptionResolver.ReturnType getReturnType() {
         return returnType;
     }
 
@@ -104,7 +104,7 @@ public class BusinessException extends RuntimeException {
      *
      * @param returnType 返回类型
      */
-    public void setReturnType(XjjHandlerExceptionResolver.ReturnType returnType) {
+    public void setReturnType(CommonHandlerExceptionResolver.ReturnType returnType) {
         this.returnType = returnType;
     }
 

@@ -11,9 +11,9 @@ HISTORY
 package com.fast.develop.sys.xfile.service;
 
 import com.fast.develop.sys.xfile.entity.XfileEntity;
-import com.fast.develop.framework.service.XjjService;
+import com.fast.develop.framework.service.BaseService;
 
-public interface XfileService extends XjjService<XfileEntity> {
+public interface XfileService extends BaseService<XfileEntity> {
 
 
 }

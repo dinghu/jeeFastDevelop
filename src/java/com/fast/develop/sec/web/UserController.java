@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fast.develop.common.DictConstants;
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.exception.ValidationException;
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.utils.Excel2007Util;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.Pagination;
 import com.fast.develop.framework.web.support.QueryParameter;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sys.dict.entity.DictItem;
 import com.fast.develop.sys.dict.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ import com.fast.develop.framework.security.annotations.SecDelete;
 import com.fast.develop.framework.security.annotations.SecEdit;
 import com.fast.develop.framework.security.annotations.SecList;
 import com.fast.develop.framework.security.annotations.SecPrivilege;
-import com.fast.develop.sec.entity.XjjUser;
+import com.fast.develop.sec.entity.User;
 import com.fast.develop.sec.service.UserService;
 
 @Controller
@@ -57,11 +57,11 @@ public class UserController extends SpringControllerSupport {
     @SecList
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        @ModelAttribute("page") Pagination page
     ) {
         //只查询类型为管理员的用户
-        query.addQuery("query.userType@eq@s", XJJConstants.USER_TYPE_USER);
+        query.addQuery("query.userType@eq@s", Constants.USER_TYPE_USER);
         query.addOrderByAsc("id");
         page = userService.findPage(query, page);
         return getViewPath("list");
@@ -69,12 +69,12 @@ public class UserController extends SpringControllerSupport {
 
     @SecCreate
     @RequestMapping("/input")
-    public String input(@ModelAttribute("user") XjjUser user,
-                        @QueryParameter XJJParameter query,
+    public String input(@ModelAttribute("user") User user,
+                        @QueryParameter QueryParameters query,
                         Model model) {
         //查询省份
         query.addQuery("query.groupCode@eq@s", DictConstants.DICT_PROVINCE);
-        query.addQuery("query.status@eq@s", XJJConstants.COMMON_STATUS_VALID);
+        query.addQuery("query.status@eq@s", Constants.COMMON_STATUS_VALID);
         query.addOrderByAsc("sn");
         List<DictItem> dictList = dictService.findList(query);
         model.addAttribute("dictList", dictList);
@@ -87,19 +87,19 @@ public class UserController extends SpringControllerSupport {
     @SecEdit
     @RequestMapping("/input/{id}")
     public String edit(@PathVariable("id") Long id,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        Model model) {
 
         //查询省份
         query.addQuery("query.groupCode@eq@s", DictConstants.DICT_PROVINCE);
-        query.addQuery("query.status@eq@s", XJJConstants.COMMON_STATUS_VALID);
+        query.addQuery("query.status@eq@s", Constants.COMMON_STATUS_VALID);
         query.addOrderByAsc("sn");
         List<DictItem> dictList = dictService.findList(query);
         model.addAttribute("dictList", dictList);
 
 
         //查询用户
-        XjjUser user = userService.getById(id);
+        User user = userService.getById(id);
         model.addAttribute("user", user);
         return getViewPath("input");
     }
@@ -114,36 +114,36 @@ public class UserController extends SpringControllerSupport {
     @SecEdit
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute XjjUser user) {
+    JsonResult save(@ModelAttribute User user) {
 
 
         try {
             if (user.isNew()) {
                 user.setCreateDate(new Date());
-                user.setUserType(XJJConstants.USER_TYPE_USER);
+                user.setUserType(Constants.USER_TYPE_USER);
                 userService.save(user);
             } else {
                 userService.update(user);
             }
         } catch (Exception e) {
             if (e.getCause() == null) {
-                return XjjJson.error("保存失败");
+                return JsonResult.error("保存失败");
             }
 
             if (e.getCause().toString().contains("unique_login_name")) {
-                return XjjJson.error("保存失败,账号" + user.getLoginName() + "已经被注册。");
+                return JsonResult.error("保存失败,账号" + user.getLoginName() + "已经被注册。");
             }
             if (e.getCause().toString().contains("unique_email")) {
-                return XjjJson.error("保存失败,邮箱" + user.getEmail() + "已经被注册。");
+                return JsonResult.error("保存失败,邮箱" + user.getEmail() + "已经被注册。");
             }
 
             if (e.getCause().toString().contains("unique_mobile")) {
-                return XjjJson.error("保存失败,手机号" + user.getMobile() + "已经被注册。");
+                return JsonResult.error("保存失败,手机号" + user.getMobile() + "已经被注册。");
             }
-            return XjjJson.error("保存失败");
+            return JsonResult.error("保存失败");
         }
 
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 
@@ -152,7 +152,7 @@ public class UserController extends SpringControllerSupport {
         if (userId == null) {
             return "redirect:/user/list";
         }
-        XjjUser user = userService.getById(userId);
+        User user = userService.getById(userId);
         if (user == null) {
             return "forward:/user/list";
         }
@@ -163,22 +163,22 @@ public class UserController extends SpringControllerSupport {
     @SecDelete
     @RequestMapping("/delete/{id}")
     public @ResponseBody
-    XjjJson delete(@PathVariable("id") Long id) {
+    JsonResult delete(@PathVariable("id") Long id) {
         userService.delete(id);
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
     @SecDelete
     @RequestMapping("/delete")
     public @ResponseBody
-    XjjJson delete(@RequestParam("ids") Long[] ids) {
+    JsonResult delete(@RequestParam("ids") Long[] ids) {
         if (ids == null || ids.length == 0) {
-            return XjjJson.error("没有删除");
+            return JsonResult.error("没有删除");
         }
         for (Long id : ids) {
             userService.delete(id);
         }
-        return XjjJson.success("成功删除" + ids.length + "条");
+        return JsonResult.success("成功删除" + ids.length + "条");
     }
 
     /**
@@ -201,7 +201,7 @@ public class UserController extends SpringControllerSupport {
      */
     @RequestMapping(value = "/import/save", method = RequestMethod.POST)
     public @ResponseBody
-    XjjJson importSave(Model model, @RequestParam(value = "fileId", required = false) Long fileId) {
+    JsonResult importSave(Model model, @RequestParam(value = "fileId", required = false) Long fileId) {
 
 
         System.out.println("上传开始----");
@@ -209,10 +209,10 @@ public class UserController extends SpringControllerSupport {
         try {
             Map<String, Object> map = userService.saveImportUser(fileId);
             int allCnt = (Integer) map.get("allCnt");
-            return XjjJson.success("导入成功：本次共计导入数据" + allCnt + "条");
+            return JsonResult.success("导入成功：本次共计导入数据" + allCnt + "条");
         } catch (ValidationException e) {
 
-            return XjjJson.error("导入失败：<br/>" + e.getMessage());
+            return JsonResult.error("导入失败：<br/>" + e.getMessage());
         }
 
     }
@@ -228,7 +228,7 @@ public class UserController extends SpringControllerSupport {
     @RequestMapping(value = "/export/excel")
     public String exportExcel(HttpServletRequest request, HttpServletResponse response) {
 
-        List<XjjUser> userList = userService.findAll();
+        List<User> userList = userService.findAll();
 
         LinkedHashMap<String, String> columns = new LinkedHashMap<String, String>();
         columns.put("loginName", "账号");

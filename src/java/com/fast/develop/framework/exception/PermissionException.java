@@ -1,6 +1,6 @@
 package com.fast.develop.framework.exception;
 
-import com.fast.develop.framework.exception.XjjHandlerExceptionResolver.ReturnType;
+import com.fast.develop.framework.exception.CommonHandlerExceptionResolver.ReturnType;
 
 
 /**

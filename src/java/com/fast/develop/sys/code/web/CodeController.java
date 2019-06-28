@@ -2,7 +2,7 @@ package com.fast.develop.sys.code.web;
 
 import java.util.List;
 
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.security.annotations.SecFunction;
 import com.fast.develop.framework.security.annotations.SecPrivilege;
 import com.fast.develop.framework.utils.StringUtils;
@@ -47,16 +47,16 @@ public class CodeController extends SpringControllerSupport {
     @SecFunction(code = "generate", title = "代码生成")
     @RequestMapping("/generate")
     public @ResponseBody
-    XjjJson generate(@RequestParam(required = false, value = "tables") String[] tables,
-                     @RequestParam("codePath") String codePath,
-                     @RequestParam("globalPackage") String globalPackage,
-                     @RequestParam("projectName") String projectName,
-                     @RequestParam("diffTable") String diffTable,
-                     @RequestParam("tablePre") String tablePre,
-                     @RequestParam("template") String template) {
+    JsonResult generate(@RequestParam(required = false, value = "tables") String[] tables,
+                        @RequestParam("codePath") String codePath,
+                        @RequestParam("globalPackage") String globalPackage,
+                        @RequestParam("projectName") String projectName,
+                        @RequestParam("diffTable") String diffTable,
+                        @RequestParam("tablePre") String tablePre,
+                        @RequestParam("template") String template) {
 
         if (tables == null || tables.length == 0) {
-            return XjjJson.error("请选择要生成代码的数据库表");
+            return JsonResult.error("请选择要生成代码的数据库表");
         }
 
         //参数初始化
@@ -74,7 +74,7 @@ public class CodeController extends SpringControllerSupport {
 
             GCGenerator.generateCode(model);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 }

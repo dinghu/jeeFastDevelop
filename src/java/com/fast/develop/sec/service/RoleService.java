@@ -12,11 +12,11 @@ package com.fast.develop.sec.service;
 
 import java.util.List;
 
-import com.fast.develop.framework.service.XjjService;
+import com.fast.develop.framework.service.BaseService;
 import com.fast.develop.sec.entity.RoleEntity;
 import com.fast.develop.sec.entity.RolePrivilegeEntity;
 
-public interface RoleService extends XjjService<RoleEntity> {
+public interface RoleService extends BaseService<RoleEntity> {
     public List<RoleEntity> findListNoUser(Long userId);
 
     public RoleEntity getByCode(String code);

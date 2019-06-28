@@ -6,7 +6,7 @@ package com.fast.develop.framework.utils;
  * <p>Copyright: Copyright (c) 2018</p>
  * <p>Company: xjj</p>
  *
- * @author xjj
+ * @author hale
  * @version 0.1
  */
 

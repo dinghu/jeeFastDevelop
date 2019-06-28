@@ -12,7 +12,7 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.configuration.ConfigUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.spring.LocalizedTextContext;
 import com.fast.develop.framework.utils.StringUtils;
 import com.fast.develop.framework.web.ManagerInfo;
@@ -35,15 +35,15 @@ import com.fast.develop.framework.web.ManagerInfo;
  * @author zhanghejie
  */
 @Component
-public class XjjHandlerExceptionResolver implements HandlerExceptionResolver {
+public class CommonHandlerExceptionResolver implements HandlerExceptionResolver {
 
-    private static final Logger logger = Logger.getLogger(XjjHandlerExceptionResolver.class);
+    private static final Logger logger = Logger.getLogger(CommonHandlerExceptionResolver.class);
     private boolean isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
 
     /**
      * 异常返回类型
      *
-     * @author xjj
+     * @author hale
      */
     public enum ReturnType {JSON, REDIRECT}
 
@@ -154,7 +154,7 @@ public class XjjHandlerExceptionResolver implements HandlerExceptionResolver {
     }
 
     private String getJson(String message) {
-        XjjJson messageJson = XjjJson.error(message);
+        JsonResult messageJson = JsonResult.error(message);
         try {
             ObjectMapper mapper = new ObjectMapper();
             //mapper.set.setVisibility(JsonMethod.GETTER, Visibility.PUBLIC_ONLY);
@@ -229,7 +229,7 @@ public class XjjHandlerExceptionResolver implements HandlerExceptionResolver {
             content.append("用户地址：").append(getIpAddr(request)).append("<br>");
 
 
-            ManagerInfo info = (ManagerInfo) request.getSession().getAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY);
+            ManagerInfo info = (ManagerInfo) request.getSession().getAttribute(Constants.SESSION_MANAGER_INFO_KEY);
             if (info != null) {
                 content.append("用户名：").append(info.getUserName()).append("<br>");
                 content.append("登录名：").append(info.getLoginName()).append("<br>");

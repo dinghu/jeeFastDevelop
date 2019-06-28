@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.fast.develop.framework.entity.EntitySupport;
 
-public interface XjjDAO<E extends EntitySupport> {
+public interface BaseDAO<E extends EntitySupport> {
     public void save(E obj);
 
     public void update(E obj);

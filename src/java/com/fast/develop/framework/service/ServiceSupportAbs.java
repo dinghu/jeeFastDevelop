@@ -3,26 +3,26 @@ package com.fast.develop.framework.service;
 import java.util.List;
 
 import com.fast.develop.framework.dao.CommonDao;
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import com.fast.develop.framework.entity.EntitySupport;
 import com.fast.develop.framework.exception.DataAccessException;
 import com.fast.develop.framework.web.support.Pagination;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fast.develop.framework.utils.StringUtils;
 
 @Transactional
-public abstract class XjjServiceSupport<E extends EntitySupport> implements XjjService<E> {
+public abstract class ServiceSupportAbs<E extends EntitySupport> implements BaseService<E> {
 
     @Autowired
     private CommonDao commonDao;
 
-    public XjjServiceSupport() {
+    public ServiceSupportAbs() {
     }
 
-    public abstract XjjDAO<E> getDao();
+    public abstract BaseDAO<E> getDao();
 
     public Long save(E obj) {
         getDao().save(obj);
@@ -50,7 +50,7 @@ public abstract class XjjServiceSupport<E extends EntitySupport> implements XjjS
     }
 
 
-    public int getCount(XJJParameter query) {
+    public int getCount(QueryParameters query) {
         return getDao().getCount(query.getQueryMap());
     }
 
@@ -58,11 +58,11 @@ public abstract class XjjServiceSupport<E extends EntitySupport> implements XjjS
         return getDao().findAll();
     }
 
-    public List<E> findList(XJJParameter query) {
+    public List<E> findList(QueryParameters query) {
         return getDao().findList(query.getQueryMap());
     }
 
-    public Pagination findPage(XJJParameter query, Pagination page) {
+    public Pagination findPage(QueryParameters query, Pagination page) {
         int totalRecord = getDao().getCount(query.getQueryMap());
         page.setTotalRecord(totalRecord);
 
@@ -73,7 +73,7 @@ public abstract class XjjServiceSupport<E extends EntitySupport> implements XjjS
         return page;
     }
 
-    public E getByParam(XJJParameter param) throws DataAccessException {
+    public E getByParam(QueryParameters param) throws DataAccessException {
         List<E> list = getDao().findList(param.getQueryMap());
 
         if (null == list || list.size() == 0) {

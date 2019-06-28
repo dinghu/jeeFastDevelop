@@ -370,7 +370,7 @@ public class MailUtils {
 //
 //	/**
 //     * 内部接口，邮件内容
-//     * @author xjj
+//     * @author hale
 //     */
 //    public interface MailMessage{
 //    	public void addSendCount();
@@ -379,7 +379,7 @@ public class MailUtils {
 //    }
 //    /**
 //     * 内部类，实现了邮件内容的公共方法，包括地址和发送次数
-//     * @author xjj
+//     * @author hale
 //     */
 //    public abstract class MailMessageSupport implements MailMessage{
 //    	private List<String> toList;

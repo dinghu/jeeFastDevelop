@@ -14,11 +14,11 @@ package com.fast.develop.sec.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fast.develop.common.XJJConstants;
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.common.Constants;
+import com.fast.develop.framework.dao.BaseDAO;
 import com.fast.develop.framework.security.SecurityConstants;
-import com.fast.develop.framework.service.XjjServiceSupport;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.service.ServiceSupportAbs;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sec.dao.MenuDao;
 import com.fast.develop.sec.dao.RolePrivilegeDao;
 import com.fast.develop.sec.entity.MenuEntity;
@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MenuServiceImpl extends XjjServiceSupport<MenuEntity> implements MenuService {
+public class MenuServiceImplAbs extends ServiceSupportAbs<MenuEntity> implements MenuService {
 
     @Autowired
     private MenuDao menuDao;
@@ -37,7 +37,7 @@ public class MenuServiceImpl extends XjjServiceSupport<MenuEntity> implements Me
     private RolePrivilegeDao rolePrivilegeDao;
 
     @Override
-    public XjjDAO<MenuEntity> getDao() {
+    public BaseDAO<MenuEntity> getDao() {
 
         return menuDao;
     }
@@ -50,9 +50,9 @@ public class MenuServiceImpl extends XjjServiceSupport<MenuEntity> implements Me
      * 查询所有有效的菜单
      */
     public List<MenuEntity> findAllValid() {
-        XJJParameter query = new XJJParameter();
+        QueryParameters query = new QueryParameters();
         //查询所有有效的菜单
-        query.addQuery("query.status@eq@s", XJJConstants.COMMON_STATUS_VALID);
+        query.addQuery("query.status@eq@s", Constants.COMMON_STATUS_VALID);
         query.addOrderByAsc("code");
         List<MenuEntity> menuList = this.findList(query);
 

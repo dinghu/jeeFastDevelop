@@ -2,7 +2,7 @@
  * Description: PrivilegeService for 权限
  * Copyright:   Copyright (c) 2018
  * Company:     xjj
- * @author xjj
+ * @author hale
  * @version 1.0
  **************************************************/
 

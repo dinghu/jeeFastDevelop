@@ -3,7 +3,7 @@ package com.fast.develop.common;
 import com.fast.develop.framework.utils.EncryptUtils;
 
 
-public class XJJConstants {
+public class Constants {
 
 
     /**

@@ -16,7 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.utils.DateTimeUtils;
 import com.fast.develop.framework.utils.FileUtils;
 import com.fast.develop.framework.web.SpringControllerSupport;
@@ -208,7 +208,7 @@ public class FileUploaderController extends SpringControllerSupport {
                     FileUtils.deleteFile(fileManager.getFilePath());
                     xfileService.delete(fileManager);
                 } else {
-                    fileManager.setIsDeleted(XJJConstants.COMMON_YESNO_YES);
+                    fileManager.setIsDeleted(Constants.COMMON_YESNO_YES);
                     xfileService.update(fileManager);
                 }
             }

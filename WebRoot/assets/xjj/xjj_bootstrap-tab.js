@@ -1,7 +1,7 @@
 /**
  * Bootstrap tab组件封装
  * @created 2017/11/29
- * @author xjj
+ * @author hale
  */
 (function ($, window, document, undefined) {
     'use strict';

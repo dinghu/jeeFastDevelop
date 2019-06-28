@@ -12,13 +12,13 @@ package com.fast.develop.sec.web;
 
 import java.util.List;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.exception.ValidationException;
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.security.dto.Privilege;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.QueryParameter;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +54,7 @@ public class MenuController extends SpringControllerSupport {
     @SecList
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query
+                       @QueryParameter QueryParameters query
     ) {
 
         //查询第一级菜单
@@ -114,7 +114,7 @@ public class MenuController extends SpringControllerSupport {
     @SecEdit
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute MenuEntity menu) {
+    JsonResult save(@ModelAttribute MenuEntity menu) {
 
         validateSave(menu);
         menu.setUrl(this.getPrivilegeURL(menu.getPrivilegeCode()));
@@ -123,7 +123,7 @@ public class MenuController extends SpringControllerSupport {
         } else {
             menuService.update(menu);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 
@@ -164,33 +164,33 @@ public class MenuController extends SpringControllerSupport {
     @SecDelete
     @RequestMapping("/delete/{id}")
     public @ResponseBody
-    XjjJson delete(@PathVariable("id") Long id) {
+    JsonResult delete(@PathVariable("id") Long id) {
 
         try {
             menuService.delete(id);
         } catch (Exception e) {
-            return XjjJson.error("请删空子菜单后，再删除父菜单");
+            return JsonResult.error("请删空子菜单后，再删除父菜单");
         }
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
     @RequestMapping("/disable/{id}")
     public @ResponseBody
-    XjjJson disable(@PathVariable("id") Long id) {
+    JsonResult disable(@PathVariable("id") Long id) {
         MenuEntity menu = menuService.getById(id);
-        menu.setStatus(XJJConstants.COMMON_STATUS_INVALID);
+        menu.setStatus(Constants.COMMON_STATUS_INVALID);
         menuService.update(menu);
-        return XjjJson.success("禁用菜单成功！");
+        return JsonResult.success("禁用菜单成功！");
     }
 
 
     @RequestMapping("/enable/{id}")
     public @ResponseBody
-    XjjJson enable(@PathVariable("id") Long id) {
+    JsonResult enable(@PathVariable("id") Long id) {
         MenuEntity menu = menuService.getById(id);
-        menu.setStatus(XJJConstants.COMMON_STATUS_VALID);
+        menu.setStatus(Constants.COMMON_STATUS_VALID);
         menuService.update(menu);
-        return XjjJson.success("启用菜单成功！");
+        return JsonResult.success("启用菜单成功！");
     }
 
     /*

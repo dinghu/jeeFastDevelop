@@ -6,19 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.dao.CommonDao;
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import com.fast.develop.framework.exception.ValidationException;
-import com.fast.develop.framework.service.XjjServiceSupport;
+import com.fast.develop.framework.service.ServiceSupportAbs;
 import com.fast.develop.framework.utils.DateTimeUtils;
 import com.fast.develop.framework.utils.StringTools;
 import com.fast.develop.framework.utils.StringUtils;
 import com.fast.develop.framework.utils.ValidatorUtils;
 import com.fast.develop.framework.web.support.Pagination;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sec.dao.UserDao;
-import com.fast.develop.sec.entity.XjjUser;
+import com.fast.develop.sec.entity.User;
 import com.fast.develop.sec.service.UserService;
 import com.fast.develop.sys.xfile.dao.XfileDao;
 import com.fast.develop.sys.xfile.entity.XfileEntity;
@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserService {
+public class UserServiceImplAbs extends ServiceSupportAbs<User> implements UserService {
 
     @Autowired
     private UserDao userDao;
@@ -41,12 +41,12 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
     private XfileDao xfileDao;
 
     @Override
-    public XjjDAO<XjjUser> getDao() {
+    public BaseDAO<User> getDao() {
 
         return userDao;
     }
 
-    public Pagination findPage(XJJParameter query, Pagination page) {
+    public Pagination findPage(QueryParameters query, Pagination page) {
         int totalRecord = getDao().getCount(query.getQueryMap());
         page.setTotalRecord(totalRecord);
 
@@ -54,7 +54,7 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
         int currentPage = page.getCurrentPage();
         int offset = (currentPage - 1) * limit;
 
-        if (XJJConstants.USER_TYPE_ADMIN.equals(query.getQuery("userType@eq"))) {
+        if (Constants.USER_TYPE_ADMIN.equals(query.getQuery("userType@eq"))) {
             page.setItems(userDao.managerPage(query.getQueryMap(), offset, limit));
         } else {
             page.setItems(userDao.findPage(query.getQueryMap(), offset, limit));
@@ -72,7 +72,7 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
      */
     public Map<String, Object> saveImportUser(Long fileId) throws ValidationException {
         //校验数据并返回合法数据
-        List<XjjUser> users = this.validImportUser(fileId, fileId);
+        List<User> users = this.validImportUser(fileId, fileId);
         if (users == null || users.size() == 0) {
             throw new ValidationException("文件用户数据为空，请重新上传");
         }
@@ -82,7 +82,7 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
         //保存用户
         for (int i = 0; i < users.size(); i++) {
             try {
-                XjjUser user = users.get(i);
+                User user = users.get(i);
 
                 System.out.println("====user.mobile======" + user.getMobile());
 
@@ -99,7 +99,7 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
         return map;
     }
 
-    private List<XjjUser> validImportUser(Long fileId, Long orgId) throws ValidationException {
+    private List<User> validImportUser(Long fileId, Long orgId) throws ValidationException {
         //获得上传文件
         XfileEntity xfile = xfileDao.getById(fileId);
         if (xfile == null) {
@@ -139,7 +139,7 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
         if (sheet != null && sheet.getColumns() < columns) {
             validationMsg.append("上传失败：上传文件中的Excel列数必须是" + columns + "列。<br/>");
         }
-        List<XjjUser> users = new ArrayList<XjjUser>();
+        List<User> users = new ArrayList<User>();
         /**
          * 3.验证上传文件中的Excel每一行每一列都不为空
          */
@@ -213,7 +213,7 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
                 continue;
             }
 
-            XjjUser baseUser = new XjjUser();
+            User baseUser = new User();
             baseUser.setLoginName(loginName);
             baseUser.setUserName(userNameZh.replace(" ", "").replace("	", ""));
 
@@ -225,11 +225,11 @@ public class UserServiceImpl extends XjjServiceSupport<XjjUser> implements UserS
                 baseUser.setEmail(email);
             }
 
-            baseUser.setPassword(XJJConstants.USER_INIT_PASSWORD);
+            baseUser.setPassword(Constants.USER_INIT_PASSWORD);
 
             baseUser.setCreateDate(DateTimeUtils.getCurrentDate());
-            baseUser.setStatus(XJJConstants.COMMON_STATUS_VALID);
-            baseUser.setUserType(XJJConstants.USER_TYPE_USER);
+            baseUser.setStatus(Constants.COMMON_STATUS_VALID);
+            baseUser.setUserType(Constants.USER_TYPE_USER);
             users.add(baseUser);
         }
 

@@ -43,7 +43,7 @@ import com.fast.develop.framework.utils.StringUtils;
  *
  * @author zhanghejie
  */
-public class XJJParameter {
+public class QueryParameters {
 
     private static String PARAM_FIX = "query.";
     private static String PARAM_PATTERN = "[a-z_A-Z0-9]+@[a-z]{2}(@[sbilfDdt]{1})?";

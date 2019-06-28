@@ -10,11 +10,11 @@ HISTORY
  **************************************************/
 package com.fast.develop.sec.web;
 
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.Pagination;
 import com.fast.develop.framework.web.support.QueryParameter;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +48,7 @@ public class RoleController extends SpringControllerSupport {
     @SecList
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        @ModelAttribute("page") Pagination page
     ) {
         page = roleService.findPage(query, page);
@@ -71,7 +71,7 @@ public class RoleController extends SpringControllerSupport {
 
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute RoleEntity role) {
+    JsonResult save(@ModelAttribute RoleEntity role) {
 
         validateSave(role);
         if (role.isNew()) {
@@ -80,7 +80,7 @@ public class RoleController extends SpringControllerSupport {
         } else {
             roleService.update(role);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 
@@ -94,14 +94,14 @@ public class RoleController extends SpringControllerSupport {
     @SecDelete
     @RequestMapping("/delete")
     public @ResponseBody
-    XjjJson delete(@RequestParam("ids") Long[] ids) {
+    JsonResult delete(@RequestParam("ids") Long[] ids) {
         if (ids == null || ids.length == 0) {
-            return XjjJson.error("没有选择删除记录");
+            return JsonResult.error("没有选择删除记录");
         }
         for (Long id : ids) {
             roleService.delete(id);
         }
-        return XjjJson.success("成功删除" + ids.length + "条");
+        return JsonResult.success("成功删除" + ids.length + "条");
     }
 }
 

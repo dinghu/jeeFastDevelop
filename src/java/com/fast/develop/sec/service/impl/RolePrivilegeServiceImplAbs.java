@@ -17,14 +17,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import com.fast.develop.framework.security.PrivilegeService;
 import com.fast.develop.framework.security.dto.Function;
 import com.fast.develop.framework.security.dto.Privilege;
 import com.fast.develop.framework.security.dto.TreeNode;
-import com.fast.develop.framework.service.XjjServiceSupport;
+import com.fast.develop.framework.service.ServiceSupportAbs;
 import com.fast.develop.framework.utils.StringUtils;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sec.dao.RoleDao;
 import com.fast.develop.sec.dao.RolePrivilegeDao;
 import com.fast.develop.sec.entity.RoleEntity;
@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RolePrivilegeServiceImpl extends XjjServiceSupport<RolePrivilegeEntity> implements RolePrivilegeService {
+public class RolePrivilegeServiceImplAbs extends ServiceSupportAbs<RolePrivilegeEntity> implements RolePrivilegeService {
 
     @Autowired
     private RolePrivilegeDao rolePrivilegeDao;
@@ -43,12 +43,12 @@ public class RolePrivilegeServiceImpl extends XjjServiceSupport<RolePrivilegeEnt
     private RoleDao roleDao;
 
     @Override
-    public XjjDAO<RolePrivilegeEntity> getDao() {
+    public BaseDAO<RolePrivilegeEntity> getDao() {
 
         return rolePrivilegeDao;
     }
 
-    public RolePrivilegeEntity getByParam(XJJParameter param) {
+    public RolePrivilegeEntity getByParam(QueryParameters param) {
         List<RolePrivilegeEntity> list = rolePrivilegeDao.findList(param.getQueryMap());
 
         if (list.size() == 1) {

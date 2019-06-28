@@ -3,11 +3,11 @@ package com.fast.develop.sec.entity;
 import java.util.Date;
 import java.util.List;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.entity.EntitySupport;
 import com.fast.develop.framework.utils.StringUtils;
 
-public class XjjUser extends EntitySupport {
+public class User extends EntitySupport {
 
     private String loginName;
     private String password;
@@ -24,12 +24,12 @@ public class XjjUser extends EntitySupport {
     private String status;
     List<RoleEntity> roles;
 
-    public XjjUser() {
+    public User() {
     }
 
-    public XjjUser(long id, String loginName, String password, String userName,
-                   String mobile, String email, String address, String userType,
-                   Date createDate, String status) {
+    public User(long id, String loginName, String password, String userName,
+                String mobile, String email, String address, String userType,
+                Date createDate, String status) {
         super();
         this.id = id;
         this.loginName = loginName;
@@ -54,7 +54,7 @@ public class XjjUser extends EntitySupport {
     public String getPassword() {
 
         if (StringUtils.isBlank(password)) {
-            return XJJConstants.USER_INIT_PASSWORD;
+            return Constants.USER_INIT_PASSWORD;
         }
         return password;
     }
@@ -130,7 +130,7 @@ public class XjjUser extends EntitySupport {
     public String getStatus() {
 
         if (StringUtils.isBlank(status)) {
-            return XJJConstants.COMMON_STATUS_VALID;
+            return Constants.COMMON_STATUS_VALID;
         }
         return status;
     }

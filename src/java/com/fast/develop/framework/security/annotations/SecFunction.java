@@ -11,7 +11,7 @@ import com.fast.develop.framework.security.SecurityConstants;
 /**
  * 功能标注
  *
- * @author xjj
+ * @author hale
  */
 @Inherited
 @Target(ElementType.METHOD)

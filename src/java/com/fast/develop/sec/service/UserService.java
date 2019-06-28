@@ -3,10 +3,10 @@ package com.fast.develop.sec.service;
 import java.util.Map;
 
 import com.fast.develop.framework.exception.ValidationException;
-import com.fast.develop.framework.service.XjjService;
-import com.fast.develop.sec.entity.XjjUser;
+import com.fast.develop.framework.service.BaseService;
+import com.fast.develop.sec.entity.User;
 
-public interface UserService extends XjjService<XjjUser> {
+public interface UserService extends BaseService<User> {
     /**
      * 导入用户
      *

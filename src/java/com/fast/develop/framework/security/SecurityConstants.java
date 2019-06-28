@@ -3,7 +3,7 @@ package com.fast.develop.framework.security;
 /**
  * 权限的常量类
  *
- * @author xjj
+ * @author hale
  */
 public class SecurityConstants {
 

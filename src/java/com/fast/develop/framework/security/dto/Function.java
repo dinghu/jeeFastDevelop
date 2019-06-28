@@ -2,7 +2,7 @@
  * Description: Entity for 功能
  * Copyright:   Copyright (c) 2013
  * Company:     xjj
- * @author xjj
+ * @author hale
  * @version 1.0
  **************************************************/
 

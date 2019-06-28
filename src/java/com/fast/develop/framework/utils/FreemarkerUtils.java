@@ -102,7 +102,7 @@ public class FreemarkerUtils {
     /**
      * Freemarker参数的封装类
      *
-     * @author xjj
+     * @author hale
      */
     public class FreemarkerModel {
         private Map<String, Object> model = new HashMap<String, Object>();

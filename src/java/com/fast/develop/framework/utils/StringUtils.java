@@ -1,7 +1,7 @@
 package com.fast.develop.framework.utils;
 
 /**
- * @author xjj
+ * @author hale
  */
 
 import java.io.UnsupportedEncodingException;

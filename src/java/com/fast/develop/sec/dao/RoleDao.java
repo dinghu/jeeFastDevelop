@@ -12,13 +12,13 @@ package com.fast.develop.sec.dao;
 
 import java.util.List;
 
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import org.apache.ibatis.annotations.Param;
 
 import com.fast.develop.sec.entity.RoleEntity;
 import com.fast.develop.sec.entity.RolePrivilegeEntity;
 
-public interface RoleDao extends XjjDAO<RoleEntity> {
+public interface RoleDao extends BaseDAO<RoleEntity> {
 
     public List<RoleEntity> findListNoUser(@Param("userId") Long userId);
 

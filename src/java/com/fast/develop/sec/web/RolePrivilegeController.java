@@ -12,14 +12,14 @@ package com.fast.develop.sec.web;
 
 import java.util.List;
 
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.security.annotations.SecFunction;
 import com.fast.develop.framework.security.dto.Privilege;
 import com.fast.develop.framework.security.dto.TreeNode;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.Pagination;
 import com.fast.develop.framework.web.support.QueryParameter;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +48,7 @@ public class RolePrivilegeController extends SpringControllerSupport {
 
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        @ModelAttribute("page") Pagination page
     ) {
         page = rolePrivilegeService.findPage(query, page);
@@ -70,7 +70,7 @@ public class RolePrivilegeController extends SpringControllerSupport {
 
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute RolePrivilegeEntity rolePrivilege) {
+    JsonResult save(@ModelAttribute RolePrivilegeEntity rolePrivilege) {
 
         validateSave(rolePrivilege);
         if (rolePrivilege.isNew()) {
@@ -78,7 +78,7 @@ public class RolePrivilegeController extends SpringControllerSupport {
         } else {
             rolePrivilegeService.update(rolePrivilege);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 
@@ -92,21 +92,21 @@ public class RolePrivilegeController extends SpringControllerSupport {
 
     @RequestMapping("/delete/{id}")
     public @ResponseBody
-    XjjJson delete(@PathVariable("id") Long id) {
+    JsonResult delete(@PathVariable("id") Long id) {
         rolePrivilegeService.delete(id);
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
     @RequestMapping("/delete")
     public @ResponseBody
-    XjjJson delete(@RequestParam("ids") Long[] ids) {
+    JsonResult delete(@RequestParam("ids") Long[] ids) {
         if (ids == null || ids.length == 0) {
-            return XjjJson.error("没有选择删除记录");
+            return JsonResult.error("没有选择删除记录");
         }
         for (Long id : ids) {
             rolePrivilegeService.delete(id);
         }
-        return XjjJson.success("成功删除" + ids.length + "条");
+        return JsonResult.success("成功删除" + ids.length + "条");
     }
 
 
@@ -132,14 +132,14 @@ public class RolePrivilegeController extends SpringControllerSupport {
      */
     @RequestMapping("/add/{roleId}/{priCode}/{functions}")
     public @ResponseBody
-    XjjJson addPri(@PathVariable("roleId") Long roleId,
-                   @PathVariable("priCode") String priCode,
-                   @PathVariable("functions") String functions,
-                   Model model) {
+    JsonResult addPri(@PathVariable("roleId") Long roleId,
+                      @PathVariable("priCode") String priCode,
+                      @PathVariable("functions") String functions,
+                      Model model) {
 
 
         priCode = priCode.replace("menu_", "");
-        XJJParameter param = new XJJParameter();
+        QueryParameters param = new QueryParameters();
         param.addQuery("query.roleId@eq@l", roleId);
         param.addQuery("query.privilegeCode@eq@s", priCode);
         RolePrivilegeEntity rpe = rolePrivilegeService.getByParam(param);
@@ -166,7 +166,7 @@ public class RolePrivilegeController extends SpringControllerSupport {
             }
             rolePrivilegeService.update(rpe);
         }
-        return XjjJson.success("为【" + priTitle + "】添加(" + functions + ")权限成功");
+        return JsonResult.success("为【" + priTitle + "】添加(" + functions + ")权限成功");
     }
 
 
@@ -181,10 +181,10 @@ public class RolePrivilegeController extends SpringControllerSupport {
      */
     @RequestMapping("/cancle/{roleId}/{priCode}/{functions}")
     public @ResponseBody
-    XjjJson cancelPri(@PathVariable("roleId") Long roleId,
-                      @PathVariable("priCode") String priCode,
-                      @PathVariable("functions") String functions,
-                      Model model) {
+    JsonResult cancelPri(@PathVariable("roleId") Long roleId,
+                         @PathVariable("priCode") String priCode,
+                         @PathVariable("functions") String functions,
+                         Model model) {
         priCode = priCode.replace("menu_", "");
         Privilege pri = PrivilegeService.getPrivilege(priCode);
         String priTitle = null;
@@ -192,7 +192,7 @@ public class RolePrivilegeController extends SpringControllerSupport {
             priTitle = PrivilegeService.getPrivilege(priCode).getTitle();
         }
 
-        XJJParameter param = new XJJParameter();
+        QueryParameters param = new QueryParameters();
         param.addQuery("query.roleId@eq@l", roleId);
         param.addQuery("query.privilegeCode@eq@s", priCode);
         RolePrivilegeEntity rpe = rolePrivilegeService.getByParam(param);
@@ -212,7 +212,7 @@ public class RolePrivilegeController extends SpringControllerSupport {
                 rolePrivilegeService.update(rpe);
             }
         }
-        return XjjJson.success("为【" + priTitle + "】取消(" + functions + ")权限成功");
+        return JsonResult.success("为【" + priTitle + "】取消(" + functions + ")权限成功");
     }
 
 

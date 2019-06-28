@@ -2,7 +2,7 @@ package com.fast.develop.framework.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -53,7 +53,7 @@ public class SpringControllerSupport {
      * @return
      */
     public ManagerInfo getManagerInfo() {
-        return (ManagerInfo) getRequest().getSession().getAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY);
+        return (ManagerInfo) getRequest().getSession().getAttribute(Constants.SESSION_MANAGER_INFO_KEY);
     }
 
     public HttpServletRequest getRequest() {

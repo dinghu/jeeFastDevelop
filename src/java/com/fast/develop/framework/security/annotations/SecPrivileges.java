@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * 权限集合标注
  *
- * @author xjj
+ * @author hale
  */
 @Inherited
 @Target(ElementType.METHOD)

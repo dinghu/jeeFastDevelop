@@ -3,12 +3,12 @@ package com.fast.develop.sec.web;
 import java.util.Date;
 import java.util.List;
 
-import com.fast.develop.common.XJJConstants;
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.common.Constants;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.web.SpringControllerSupport;
 import com.fast.develop.framework.web.support.Pagination;
 import com.fast.develop.framework.web.support.QueryParameter;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,7 @@ import com.fast.develop.framework.security.annotations.SecList;
 import com.fast.develop.framework.security.annotations.SecPrivilege;
 import com.fast.develop.sec.entity.RoleEntity;
 import com.fast.develop.sec.entity.UserRoleEntity;
-import com.fast.develop.sec.entity.XjjUser;
+import com.fast.develop.sec.entity.User;
 import com.fast.develop.sec.service.RoleService;
 import com.fast.develop.sec.service.UserRoleService;
 import com.fast.develop.sec.service.UserService;
@@ -54,11 +54,11 @@ public class ManagerController extends SpringControllerSupport {
     @SecList
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        @ModelAttribute("page") Pagination page
     ) {
         //只查询类型为管理员的用户
-        query.addQuery("query.userType@eq@s", XJJConstants.USER_TYPE_ADMIN);
+        query.addQuery("query.userType@eq@s", Constants.USER_TYPE_ADMIN);
         query.addOrderByAsc("id");
         page = userService.findPage(query, page);
         return getViewPath("list");
@@ -66,7 +66,7 @@ public class ManagerController extends SpringControllerSupport {
 
     @SecCreate
     @RequestMapping("/input")
-    public String input(@ModelAttribute("user") XjjUser user, Model model) {
+    public String input(@ModelAttribute("user") User user, Model model) {
 
         return getViewPath("input");
     }
@@ -77,7 +77,7 @@ public class ManagerController extends SpringControllerSupport {
     @SecEdit
     @RequestMapping("/input/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
-        XjjUser user = userService.getById(id);
+        User user = userService.getById(id);
         model.addAttribute("user", user);
         return getViewPath("input");
     }
@@ -88,7 +88,7 @@ public class ManagerController extends SpringControllerSupport {
      */
     @RequestMapping("/role/input/{userId}")
     public String role(@PathVariable("userId") Long userId, Model model) {
-        XjjUser user = userService.getById(userId);
+        User user = userService.getById(userId);
         List<RoleEntity> roleList = roleService.findListNoUser(userId);
         model.addAttribute("roleList", roleList);
         model.addAttribute("user", user);
@@ -98,7 +98,7 @@ public class ManagerController extends SpringControllerSupport {
 
     @RequestMapping("/role/save")
     public @ResponseBody
-    XjjJson roleSave(
+    JsonResult roleSave(
             @RequestParam(value = "userId") Long userId,
             @RequestParam(value = "roleIds") Long[] roleIds) {
 
@@ -110,15 +110,15 @@ public class ManagerController extends SpringControllerSupport {
                 userRoleService.save(userRole);
             }
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
     @RequestMapping("/role/cancle/{userId}/{roleId}")
     public @ResponseBody
-    XjjJson cancleRole(@PathVariable("userId") Long userId,
-                       @PathVariable("roleId") Long roleId) {
+    JsonResult cancleRole(@PathVariable("userId") Long userId,
+                          @PathVariable("roleId") Long roleId) {
         userRoleService.deleteBy2Id(userId, roleId);
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
 
@@ -130,16 +130,16 @@ public class ManagerController extends SpringControllerSupport {
      */
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute XjjUser user) {
+    JsonResult save(@ModelAttribute User user) {
 
         if (user.isNew()) {
             user.setCreateDate(new Date());
-            user.setUserType(XJJConstants.USER_TYPE_ADMIN);
+            user.setUserType(Constants.USER_TYPE_ADMIN);
             userService.save(user);
         } else {
             userService.update(user);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 
@@ -148,7 +148,7 @@ public class ManagerController extends SpringControllerSupport {
         if (userId == null) {
             return "redirect:/user/list";
         }
-        XjjUser user = userService.getById(userId);
+        User user = userService.getById(userId);
         if (user == null) {
             return "forward:/user/list";
         }
@@ -159,22 +159,22 @@ public class ManagerController extends SpringControllerSupport {
     @SecDelete
     @RequestMapping("/delete/{id}")
     public @ResponseBody
-    XjjJson delete(@PathVariable("id") Long id) {
+    JsonResult delete(@PathVariable("id") Long id) {
         userService.delete(id);
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
     @SecDelete
     @RequestMapping("/delete")
     public @ResponseBody
-    XjjJson delete(@RequestParam("ids") Long[] ids) {
+    JsonResult delete(@RequestParam("ids") Long[] ids) {
         if (ids == null || ids.length == 0) {
-            return XjjJson.error("没有删除");
+            return JsonResult.error("没有删除");
         }
         for (Long id : ids) {
             userService.delete(id);
         }
-        return XjjJson.success("成功删除" + ids.length + "条");
+        return JsonResult.success("成功删除" + ids.length + "条");
     }
 
 }

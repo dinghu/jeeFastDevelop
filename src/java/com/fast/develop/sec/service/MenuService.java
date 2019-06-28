@@ -12,10 +12,10 @@ package com.fast.develop.sec.service;
 
 import java.util.List;
 
-import com.fast.develop.framework.service.XjjService;
+import com.fast.develop.framework.service.BaseService;
 import com.fast.develop.sec.entity.MenuEntity;
 
-public interface MenuService extends XjjService<MenuEntity> {
+public interface MenuService extends BaseService<MenuEntity> {
 
 
     public List<MenuEntity> findMenusByPid(Long pid);

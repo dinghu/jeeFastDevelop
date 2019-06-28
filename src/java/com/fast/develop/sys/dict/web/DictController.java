@@ -4,7 +4,7 @@ import com.fast.develop.framework.security.annotations.SecCreate;
 import com.fast.develop.framework.security.annotations.SecEdit;
 import com.fast.develop.framework.security.annotations.SecList;
 import com.fast.develop.framework.web.support.Pagination;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fast.develop.sys.dict.entity.DictItem;
 import com.fast.develop.sys.dict.service.DictService;
-import com.fast.develop.framework.json.XjjJson;
+import com.fast.develop.framework.json.JsonResult;
 import com.fast.develop.framework.security.annotations.SecDelete;
 import com.fast.develop.framework.security.annotations.SecPrivilege;
 import com.fast.develop.framework.web.SpringControllerSupport;
@@ -38,7 +38,7 @@ public class DictController extends SpringControllerSupport {
     @SecList
     @RequestMapping(value = "/list")
     public String list(Model model,
-                       @QueryParameter XJJParameter query,
+                       @QueryParameter QueryParameters query,
                        @ModelAttribute("page") Pagination page
     ) {
         page = dictService.findPage(query, page);
@@ -70,34 +70,34 @@ public class DictController extends SpringControllerSupport {
     @SecEdit
     @RequestMapping("/save")
     public @ResponseBody
-    XjjJson save(@ModelAttribute DictItem dict) {
+    JsonResult save(@ModelAttribute DictItem dict) {
 
         if (dict.isNew()) {
             dictService.save(dict);
         } else {
             dictService.update(dict);
         }
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
     @SecDelete
     @RequestMapping("/delete/{id}")
     public @ResponseBody
-    XjjJson delete(@PathVariable("id") Long id) {
+    JsonResult delete(@PathVariable("id") Long id) {
         dictService.delete(id);
-        return XjjJson.success("成功删除1条");
+        return JsonResult.success("成功删除1条");
     }
 
     @SecDelete
     @RequestMapping("/delete")
     public @ResponseBody
-    XjjJson delete(@RequestParam("ids") Long[] ids) {
+    JsonResult delete(@RequestParam("ids") Long[] ids) {
         if (ids == null || ids.length == 0) {
-            return XjjJson.error("没有删除");
+            return JsonResult.error("没有删除");
         }
         for (Long id : ids) {
             dictService.delete(id);
         }
-        return XjjJson.success("成功删除" + ids.length + "条");
+        return JsonResult.success("成功删除" + ids.length + "条");
     }
 }

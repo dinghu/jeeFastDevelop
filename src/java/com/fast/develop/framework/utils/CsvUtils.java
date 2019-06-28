@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * CSV问卷的读取工具类
  *
- * @author xjj
+ * @author hale
  */
 public class CsvUtils {
     private List<String> rowList = new ArrayList<String>();

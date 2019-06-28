@@ -2,7 +2,7 @@ package com.fast.develop.common.passport.web;
 
 import javax.servlet.http.HttpSession;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fast.develop.framework.exception.DataAccessException;
-import com.fast.develop.framework.json.XjjJson;
-import com.fast.develop.framework.json.XjjJson.MessageType;
+import com.fast.develop.framework.json.JsonResult;
+import com.fast.develop.framework.json.JsonResult.MessageType;
 import com.fast.develop.framework.utils.EncryptUtils;
 import com.fast.develop.framework.utils.StringUtils;
 import com.fast.develop.framework.web.ManagerInfo;
 import com.fast.develop.framework.web.SpringControllerSupport;
-import com.fast.develop.framework.web.support.XJJParameter;
-import com.fast.develop.sec.entity.XjjUser;
+import com.fast.develop.framework.web.support.QueryParameters;
+import com.fast.develop.sec.entity.User;
 import com.fast.develop.sec.service.UserService;
 
 @Controller
@@ -43,25 +43,25 @@ public class PassportController extends SpringControllerSupport {
 
     @RequestMapping(value = "/logon")
     public @ResponseBody
-    XjjJson managerLogon(@RequestParam String loginName,
-                         @RequestParam String password,
-                         Model model) throws DataAccessException {
+    JsonResult managerLogon(@RequestParam String loginName,
+                            @RequestParam String password,
+                            Model model) throws DataAccessException {
 
         String msg = validateLogin(loginName, password);
         model.addAttribute("loginName", loginName);
         if (msg != null) {
-            return XjjJson.error(msg);
+            return JsonResult.error(msg);
         }
         password = EncryptUtils.MD5Encode(password);//MD5密码加密
 
 
         //查询数据库
-        XJJParameter param = new XJJParameter();
+        QueryParameters param = new QueryParameters();
         param.addQuery("query.loginName@eq@s", loginName);
-        param.addQuery("query.userType@eq@s", XJJConstants.USER_TYPE_ADMIN);
-        XjjUser user = userService.getByParam(param);
+        param.addQuery("query.userType@eq@s", Constants.USER_TYPE_ADMIN);
+        User user = userService.getByParam(param);
 
-        XjjJson json = new XjjJson();
+        JsonResult json = new JsonResult();
         json.setType(MessageType.error);
         if (null == user) {
             json.setMessage("账号不存在");
@@ -69,7 +69,7 @@ public class PassportController extends SpringControllerSupport {
             return json;
         }
 
-        if (XJJConstants.COMMON_STATUS_INVALID.equals(user.getStatus())) {
+        if (Constants.COMMON_STATUS_INVALID.equals(user.getStatus())) {
             json.setMessage("账号已被禁用");
             json.setItem("loginName");
             return json;
@@ -87,7 +87,7 @@ public class PassportController extends SpringControllerSupport {
         managerInfo.setUserName(user.getUserName());
         managerInfo.setUserType(user.getUserType());
 
-        this.getRequest().getSession().setAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY, managerInfo);
+        this.getRequest().getSession().setAttribute(Constants.SESSION_MANAGER_INFO_KEY, managerInfo);
         json.setType(MessageType.success);
         return json;
     }
@@ -128,7 +128,7 @@ public class PassportController extends SpringControllerSupport {
     @RequestMapping("/mdyinfo")
     public String infor(Model model) {
         ManagerInfo loginInfo = this.getManagerInfo();
-        XjjUser user = userService.getById(loginInfo.getUserId());
+        User user = userService.getById(loginInfo.getUserId());
         model.addAttribute("user", user);
         return this.getViewPath("mdyinfo");
     }
@@ -143,17 +143,17 @@ public class PassportController extends SpringControllerSupport {
      */
     @RequestMapping("/mdypwd/save")
     public @ResponseBody
-    XjjJson passwordModify(@RequestParam("oldpassword") String oldpassword, @RequestParam("newpassword") String newpassword, HttpSession session) {
-        if (StringUtils.isBlank(oldpassword)) return XjjJson.error("修改失败,请输入原密码!");
-        if (StringUtils.isBlank(newpassword)) return XjjJson.error("修改失败,请输入新密码!");
+    JsonResult passwordModify(@RequestParam("oldpassword") String oldpassword, @RequestParam("newpassword") String newpassword, HttpSession session) {
+        if (StringUtils.isBlank(oldpassword)) return JsonResult.error("修改失败,请输入原密码!");
+        if (StringUtils.isBlank(newpassword)) return JsonResult.error("修改失败,请输入新密码!");
         ManagerInfo loginInfo = this.getManagerInfo();
-        XjjUser loginUser = userService.getById(loginInfo.getUserId());
+        User loginUser = userService.getById(loginInfo.getUserId());
         if (!loginUser.getPassword().equals(EncryptUtils.MD5Encode(oldpassword))) {
-            return XjjJson.error("修改失败,您输入的原密码不正确!");
+            return JsonResult.error("修改失败,您输入的原密码不正确!");
         } else {
             loginUser.setPassword(EncryptUtils.MD5Encode(newpassword));
             userService.update(loginUser);
-            return XjjJson.success("密码修改成功!");
+            return JsonResult.success("密码修改成功!");
         }
     }
 
@@ -165,8 +165,8 @@ public class PassportController extends SpringControllerSupport {
      */
     @RequestMapping("/mdyinfo/save")
     public @ResponseBody
-    XjjJson personalInfoModify(@ModelAttribute XjjUser baseUser) {
-        XjjUser _baseUser = new XjjUser();
+    JsonResult personalInfoModify(@ModelAttribute User baseUser) {
+        User _baseUser = new User();
         _baseUser = userService.getById(baseUser.getId());
         _baseUser.setUserName(baseUser.getUserName());
         _baseUser.setBirthday(baseUser.getBirthday());
@@ -174,7 +174,7 @@ public class PassportController extends SpringControllerSupport {
         _baseUser.setEmail(baseUser.getEmail());
         _baseUser.setAddress(baseUser.getAddress());
         userService.update(_baseUser);
-        return XjjJson.success("保存成功");
+        return JsonResult.success("保存成功");
     }
 
 }

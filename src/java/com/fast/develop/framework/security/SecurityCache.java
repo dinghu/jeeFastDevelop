@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.web.ManagerInfo;
 import com.fast.develop.framework.spring.SpringBeanLoader;
 import com.fast.develop.framework.utils.StringUtils;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sec.entity.RolePrivilegeEntity;
 import com.fast.develop.sec.service.RolePrivilegeService;
 
@@ -17,7 +17,7 @@ import com.fast.develop.sec.service.RolePrivilegeService;
 /**
  * 权限缓存
  *
- * @author xjj
+ * @author hale
  */
 public class SecurityCache {
     //private static SecurityCache securityCache = new SecurityCache();
@@ -55,7 +55,7 @@ public class SecurityCache {
         } else {
             privilegeMap.remove(roleId);
             //查询某角色的
-            XJJParameter query = new XJJParameter();
+            QueryParameters query = new QueryParameters();
             query.addQuery("query.roleId@eq@l", roleId);
             rolePriList = rolePrivilegeService.findList(query);
         }
@@ -94,7 +94,7 @@ public class SecurityCache {
             return false;
         }
 
-        ManagerInfo manager = (ManagerInfo) request.getRequest().getSession().getAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY);
+        ManagerInfo manager = (ManagerInfo) request.getRequest().getSession().getAttribute(Constants.SESSION_MANAGER_INFO_KEY);
 
         if (null == manager) {
             return false;

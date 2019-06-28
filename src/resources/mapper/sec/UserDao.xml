@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fast.develop.sec.dao.UserDao">
-    <select id="getById" resultType="XjjUser" parameterType="long">
+    <select id="getById" resultType="User" parameterType="long">
 		SELECT
 			*
 		FROM
@@ -12,11 +12,11 @@
 			id = #{id}
 	</select>
 
-    <select id="findAll" resultType="XjjUser">
+    <select id="findAll" resultType="User">
 		SELECT * FROM t_sec_user
 	</select>
 
-    <resultMap type="com.fast.develop.sec.entity.XjjUser" id="userMap">
+    <resultMap type="com.fast.develop.sec.entity.User" id="userMap">
         <id column="id" property="id"/>
         <result column="login_name" property="loginName"/>
         <result column="password" property="password"/>
@@ -56,12 +56,12 @@
         LIMIT #{offset}, #{limit}
     </select>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.XjjUser">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.fast.develop.sec.entity.User">
 		insert into t_sec_user(login_name,password,user_name,user_type,email,mobile,create_date,status,birthday,province)
     	values(#{loginName},#{password},#{userName},#{userType},#{email},#{mobile},#{createDate},#{status},#{birthday},#{province})
 	</insert>
 
-    <update id="update" parameterType="XjjUser">
+    <update id="update" parameterType="User">
         UPDATE t_sec_user  
             SET login_name = #{loginName},   
                 password = #{password},
@@ -85,7 +85,7 @@
         <include refid="com.fast.develop.framework.dao.CommonDao.queryParam"/>
     </select>
 
-    <select id="findList" resultType="XjjUser">
+    <select id="findList" resultType="User">
         SELECT
         u.*
         FROM
@@ -95,7 +95,7 @@
     </select>
 
 
-    <select id="findPage" resultType="XjjUser">
+    <select id="findPage" resultType="User">
         SELECT
         u.*
         FROM

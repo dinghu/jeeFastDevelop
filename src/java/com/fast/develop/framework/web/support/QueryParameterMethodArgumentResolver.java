@@ -13,7 +13,7 @@ public class QueryParameterMethodArgumentResolver implements HandlerMethodArgume
     }
 
     public boolean supportsParameter(MethodParameter parameter) {
-        if (XJJParameter.class.isAssignableFrom(parameter.getParameterType())) {
+        if (QueryParameters.class.isAssignableFrom(parameter.getParameterType())) {
             return true;
         }
         return false;
@@ -23,7 +23,7 @@ public class QueryParameterMethodArgumentResolver implements HandlerMethodArgume
                                   ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) throws Exception {
 
-        XJJParameter queryParam = new XJJParameter();
+        QueryParameters queryParam = new QueryParameters();
         String query_name = getQueryName(parameter);
         String query_prefix = query_name.endsWith(".") ? query_name : query_name + ".";
 
@@ -35,7 +35,7 @@ public class QueryParameterMethodArgumentResolver implements HandlerMethodArgume
 
         if (binderFactory != null) {
             WebDataBinder binder = binderFactory.createBinder(webRequest, null, query_prefix);
-            queryParam = binder.convertIfNecessary(queryParam, XJJParameter.class, parameter);
+            queryParam = binder.convertIfNecessary(queryParam, QueryParameters.class, parameter);
         }
 
         //mavContainer.addAttribute(query_name, queryParam);
@@ -45,7 +45,7 @@ public class QueryParameterMethodArgumentResolver implements HandlerMethodArgume
 
     }
 
-    private void handlerParameter(String name, String value, XJJParameter queryParam) {
+    private void handlerParameter(String name, String value, QueryParameters queryParam) {
         queryParam.addQuery(name, value);
     }
 

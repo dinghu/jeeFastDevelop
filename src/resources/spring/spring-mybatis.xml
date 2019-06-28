@@ -206,5 +206,5 @@
          <property name="useCodeAsDefaultMessage" value="true" />  
     </bean>  
     <!-- 异常 -->
-    <bean id="exceptionHandler" class="com.fast.develop.framework.exception.XjjHandlerExceptionResolver"/>
+    <bean id="exceptionHandler" class="com.fast.develop.framework.exception.CommonHandlerExceptionResolver"/>
 </beans>

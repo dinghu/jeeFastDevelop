@@ -12,12 +12,12 @@ package com.fast.develop.sec.dao;
 
 import java.util.List;
 
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import org.apache.ibatis.annotations.Param;
 
 import com.fast.develop.sec.entity.RolePrivilegeEntity;
 
-public interface RolePrivilegeDao extends XjjDAO<RolePrivilegeEntity> {
+public interface RolePrivilegeDao extends BaseDAO<RolePrivilegeEntity> {
     public RolePrivilegeEntity getByRolePri(@Param("roleId") Long roleId, @Param("pcode") String pcode);
 
     /**

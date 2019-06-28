@@ -13,8 +13,8 @@ package com.fast.develop.sec.service.impl;
 
 import java.util.List;
 
-import com.fast.develop.framework.dao.XjjDAO;
-import com.fast.develop.framework.service.XjjServiceSupport;
+import com.fast.develop.framework.dao.BaseDAO;
+import com.fast.develop.framework.service.ServiceSupportAbs;
 import com.fast.develop.sec.dao.RoleDao;
 import com.fast.develop.sec.entity.RoleEntity;
 import com.fast.develop.sec.entity.RolePrivilegeEntity;
@@ -23,13 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleServiceImpl extends XjjServiceSupport<RoleEntity> implements RoleService {
+public class RoleServiceImplAbs extends ServiceSupportAbs<RoleEntity> implements RoleService {
 
     @Autowired
     private RoleDao roleDao;
 
     @Override
-    public XjjDAO<RoleEntity> getDao() {
+    public BaseDAO<RoleEntity> getDao() {
 
         return roleDao;
     }

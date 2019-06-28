@@ -2,7 +2,7 @@
  * Description: 权限拦截器类
  * Copyright:   Copyright (c) 2018
  * Company:     xjj
- * @author xjj
+ * @author hale
  * @version 1.0
  **************************************************/
 package com.fast.develop.framework.security.interceptor;
@@ -14,7 +14,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 //import SecurityContext;
 import com.fast.develop.framework.web.ManagerInfo;
 import com.fast.develop.sec.entity.RoleEntity;
@@ -22,7 +22,7 @@ import com.fast.develop.sec.entity.RoleEntity;
 /**
  * 权限管理拦截器
  *
- * @author xjj
+ * @author hale
  */
 public class SecurityInterceptor implements HandlerInterceptor {
 
@@ -30,7 +30,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
                              HttpServletResponse response, Object handler) throws Exception {
         //首先判断是否是Controller类，如果不是直接返回true，继续执行
         if (handler instanceof HandlerMethod) {
-            ManagerInfo loginInfo = (ManagerInfo) request.getSession().getAttribute(XJJConstants.SESSION_MANAGER_INFO_KEY);
+            ManagerInfo loginInfo = (ManagerInfo) request.getSession().getAttribute(Constants.SESSION_MANAGER_INFO_KEY);
 
 //			// 验证权限
 //			if(!loginInfo.getLoginName().equals("admin")&&!SecurityContext.hasResource(loginInfo.getRoleCodes(), request)){

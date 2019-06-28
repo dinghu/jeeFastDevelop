@@ -4,7 +4,7 @@
     <input type="hidden" name="id" value="${user.id}"/>
 <#--
 <@formgroup title='类型'>
-    <@select name="userType" list=XJJConstants.USER_TYPE value=user.userType emptyOption=false></@select>
+    <@select name="userType" list=Constants.USER_TYPE value=user.userType emptyOption=false></@select>
 </@formgroup>
 -->
     <@formgroup title='账号'><input type="text" name="loginName" value="${user.loginName}"

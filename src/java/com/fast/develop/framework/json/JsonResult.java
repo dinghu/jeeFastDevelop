@@ -3,7 +3,7 @@ package com.fast.develop.framework.json;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fast.develop.common.XJJConstants;
+import com.fast.develop.common.Constants;
 import com.fast.develop.framework.utils.StringUtils;
 
 /**
@@ -11,29 +11,26 @@ import com.fast.develop.framework.utils.StringUtils;
  *
  * @author zhanghejie
  */
-public class XjjJson implements Serializable {
+public class JsonResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static enum MessageType {success, info, warning, error}
-
-    ;
+    public enum MessageType {success, info, warning, error}
 
     private MessageType type = MessageType.success;
     private String message = "";
     private Object item;
     private List<?> items;
 
-    public XjjJson() {
+    public JsonResult() {
         super();
     }
 
     /**
      * @param type    类型
-     * @param result  结果
      * @param message 内容
      */
-    public XjjJson(MessageType type, Object... message) {
+    public JsonResult(MessageType type, Object... message) {
         super();
         this.setType(type);
         this.setMessage(message);
@@ -45,21 +42,21 @@ public class XjjJson implements Serializable {
     public String getType() {
         switch (type) {
             case success:
-                return XJJConstants.MSG_TYPE_SUCCESS;
+                return Constants.MSG_TYPE_SUCCESS;
             case info:
-                return XJJConstants.MSG_TYPE_INFO;
+                return Constants.MSG_TYPE_INFO;
             case warning:
-                return XJJConstants.MSG_TYPE_WARNING;
+                return Constants.MSG_TYPE_WARNING;
             case error:
-                return XJJConstants.MSG_TYPE_ERROR;
+                return Constants.MSG_TYPE_ERROR;
         }
-        return XJJConstants.MSG_TYPE_SUCCESS;
+        return Constants.MSG_TYPE_SUCCESS;
     }
 
     /**
      * 设置消息类型
      *
-     * @param 消息类型
+     * @param type 消息类型
      */
     public void setType(MessageType type) {
         this.type = type;
@@ -75,7 +72,7 @@ public class XjjJson implements Serializable {
     /**
      * 设置消息内容
      *
-     * @param 消息内容
+     * @param message 消息内容
      */
     public void setMessage(Object... message) {
         this.message = StringUtils.join(message);
@@ -124,8 +121,8 @@ public class XjjJson implements Serializable {
      * @param message 消息内容
      * @return 消息
      */
-    public static XjjJson message(MessageType type, Object... message) {
-        return new XjjJson(MessageType.success, message);
+    public static JsonResult message(MessageType type, Object... message) {
+        return new JsonResult(MessageType.success, message);
     }
 
     /**
@@ -134,8 +131,8 @@ public class XjjJson implements Serializable {
      * @param message 消息内容
      * @return 消息
      */
-    public static XjjJson success(Object... message) {
-        return new XjjJson(MessageType.success, message);
+    public static JsonResult success(Object... message) {
+        return new JsonResult(MessageType.success, message);
     }
 
     /**
@@ -144,8 +141,8 @@ public class XjjJson implements Serializable {
      * @param message 消息内容
      * @return 消息
      */
-    public static XjjJson info(Object... message) {
-        return new XjjJson(MessageType.info, message);
+    public static JsonResult info(Object... message) {
+        return new JsonResult(MessageType.info, message);
     }
 
     /**
@@ -154,8 +151,8 @@ public class XjjJson implements Serializable {
      * @param message 消息内容
      * @return 消息
      */
-    public static XjjJson warning(Object... message) {
-        return new XjjJson(MessageType.warning, message);
+    public static JsonResult warning(Object... message) {
+        return new JsonResult(MessageType.warning, message);
     }
 
     /**
@@ -164,7 +161,7 @@ public class XjjJson implements Serializable {
      * @param message 消息内容
      * @return 消息
      */
-    public static XjjJson error(Object... message) {
-        return new XjjJson(MessageType.error, message);
+    public static JsonResult error(Object... message) {
+        return new JsonResult(MessageType.error, message);
     }
 }

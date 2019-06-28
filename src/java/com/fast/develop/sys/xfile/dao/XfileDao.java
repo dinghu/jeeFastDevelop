@@ -10,10 +10,10 @@ HISTORY
  **************************************************/
 package com.fast.develop.sys.xfile.dao;
 
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import com.fast.develop.sys.xfile.entity.XfileEntity;
 
-public interface XfileDao extends XjjDAO<XfileEntity> {
+public interface XfileDao extends BaseDAO<XfileEntity> {
 
 }
 

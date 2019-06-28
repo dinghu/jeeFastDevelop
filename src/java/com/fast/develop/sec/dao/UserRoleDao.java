@@ -10,12 +10,12 @@ HISTORY
  **************************************************/
 package com.fast.develop.sec.dao;
 
-import com.fast.develop.framework.dao.XjjDAO;
+import com.fast.develop.framework.dao.BaseDAO;
 import org.apache.ibatis.annotations.Param;
 
 import com.fast.develop.sec.entity.UserRoleEntity;
 
-public interface UserRoleDao extends XjjDAO<UserRoleEntity> {
+public interface UserRoleDao extends BaseDAO<UserRoleEntity> {
     public void deleteBy2Id(@Param("userId") Long userId, @Param("roleId") Long roleId);
 }
 

@@ -8,7 +8,7 @@ import com.fast.develop.sys.dict.entity.DictItem;
 import com.fast.develop.sys.dict.service.DictService;
 
 
-public class DictConstants extends XJJConstants {
+public class DictConstants extends Constants {
 
     //{"provice_shandong":"山东","provice_henan":"河南"}
     private static HashMap<String, String> DICT_CACHE_MAP = new HashMap<String, String>();// 角色权限缓存

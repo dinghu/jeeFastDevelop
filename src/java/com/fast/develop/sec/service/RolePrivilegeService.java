@@ -13,11 +13,11 @@ package com.fast.develop.sec.service;
 import java.util.List;
 
 import com.fast.develop.framework.security.dto.TreeNode;
-import com.fast.develop.framework.service.XjjService;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.service.BaseService;
+import com.fast.develop.framework.web.support.QueryParameters;
 import com.fast.develop.sec.entity.RolePrivilegeEntity;
 
-public interface RolePrivilegeService extends XjjService<RolePrivilegeEntity> {
+public interface RolePrivilegeService extends BaseService<RolePrivilegeEntity> {
 
     /**
      * 通过角色id取得权限树
@@ -27,5 +27,5 @@ public interface RolePrivilegeService extends XjjService<RolePrivilegeEntity> {
      */
     public List<TreeNode> listpri(Long roleid);
 
-    public RolePrivilegeEntity getByParam(XJJParameter param);
+    public RolePrivilegeEntity getByParam(QueryParameters param);
 }

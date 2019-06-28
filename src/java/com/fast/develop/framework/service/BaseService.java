@@ -5,9 +5,9 @@ import java.util.List;
 import com.fast.develop.framework.entity.EntitySupport;
 import com.fast.develop.framework.exception.DataAccessException;
 import com.fast.develop.framework.web.support.Pagination;
-import com.fast.develop.framework.web.support.XJJParameter;
+import com.fast.develop.framework.web.support.QueryParameters;
 
-public interface XjjService<E extends EntitySupport> {
+public interface BaseService<E extends EntitySupport> {
 
     /**
      * 保存
@@ -34,7 +34,7 @@ public interface XjjService<E extends EntitySupport> {
     /**
      * 删除
      *
-     * @param id
+     * @param obj
      */
     public void delete(E obj);
 
@@ -43,7 +43,7 @@ public interface XjjService<E extends EntitySupport> {
      *
      * @param param
      */
-    public int getCount(XJJParameter param);
+    public int getCount(QueryParameters param);
 
     /**
      * 根据ID得到实体类
@@ -59,7 +59,7 @@ public interface XjjService<E extends EntitySupport> {
      * @param param
      * @return
      */
-    public E getByParam(XJJParameter param) throws DataAccessException;
+    public E getByParam(QueryParameters param) throws DataAccessException;
 
     /**
      * 查询所有
@@ -74,7 +74,7 @@ public interface XjjService<E extends EntitySupport> {
      * @param param
      * @return
      */
-    public List<E> findList(XJJParameter param);
+    public List<E> findList(QueryParameters param);
 
     /**
      * 根据某属性值数组查询列表
@@ -92,7 +92,7 @@ public interface XjjService<E extends EntitySupport> {
      * @param page
      * @return
      */
-    public Pagination findPage(XJJParameter param, Pagination page);
+    public Pagination findPage(QueryParameters param, Pagination page);
 
     /**
      * 判断是否唯一

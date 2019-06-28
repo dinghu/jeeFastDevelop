@@ -10,10 +10,10 @@ HISTORY
  **************************************************/
 package com.fast.develop.sec.service;
 
-import com.fast.develop.framework.service.XjjService;
+import com.fast.develop.framework.service.BaseService;
 import com.fast.develop.sec.entity.UserRoleEntity;
 
-public interface UserRoleService extends XjjService<UserRoleEntity> {
+public interface UserRoleService extends BaseService<UserRoleEntity> {
 
     public void deleteBy2Id(Long userId, Long roleId);
 }

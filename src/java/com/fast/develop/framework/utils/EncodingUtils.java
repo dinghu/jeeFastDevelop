@@ -11,7 +11,7 @@ import java.nio.charset.Charset;
 /**
  * 字符编码工具类
  *
- * @author xjj
+ * @author hale
  */
 public class EncodingUtils {
 

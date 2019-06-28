@@ -11,8 +11,8 @@ HISTORY
 
 package com.fast.develop.sec.service.impl;
 
-import com.fast.develop.framework.dao.XjjDAO;
-import com.fast.develop.framework.service.XjjServiceSupport;
+import com.fast.develop.framework.dao.BaseDAO;
+import com.fast.develop.framework.service.ServiceSupportAbs;
 import com.fast.develop.sec.dao.UserRoleDao;
 import com.fast.develop.sec.entity.UserRoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Service;
 import com.fast.develop.sec.service.UserRoleService;
 
 @Service
-public class UserRoleServiceImpl extends XjjServiceSupport<UserRoleEntity> implements UserRoleService {
+public class UserRoleServiceImplAbs extends ServiceSupportAbs<UserRoleEntity> implements UserRoleService {
 
     @Autowired
     private UserRoleDao userRoleDao;
 
     @Override
-    public XjjDAO<UserRoleEntity> getDao() {
+    public BaseDAO<UserRoleEntity> getDao() {
 
         return userRoleDao;
     }

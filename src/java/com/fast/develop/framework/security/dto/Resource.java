@@ -2,7 +2,7 @@
  * Description: Entity for 资源管理
  * Copyright:   Copyright (c) 2018
  * Company:     xjj
- * @author xjj
+ * @author hale
  * @version 1.0
  **************************************************/
 

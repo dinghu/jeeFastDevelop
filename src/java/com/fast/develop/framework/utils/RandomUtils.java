@@ -6,7 +6,7 @@ package com.fast.develop.framework.utils;
 import java.util.Random;
 
 /**
- * @author xjj
+ * @author hale
  *
  */
 public class RandomUtils {
